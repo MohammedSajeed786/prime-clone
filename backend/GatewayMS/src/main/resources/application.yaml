@@ -1,0 +1,20 @@
+server:
+  port: 8000
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: CustomerMS
+          uri: http://localhost:8001
+          predicates:
+            - Path=/auth/**
+        - id: DemoMS
+          uri: http://localhost:8002
+          predicates:
+            - Path=/demo/**
+          filters:
+            - JwtAuthenticationFilter
+
+
+

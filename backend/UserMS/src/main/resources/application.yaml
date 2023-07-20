@@ -1,0 +1,14 @@
+server:
+  port: 8001
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/prime_user
+    username: root
+    password: Sajeed@07
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate.format.sql: true
