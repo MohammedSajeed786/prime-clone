@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieDetailsDto {
-    private long id;
+    private Integer movieId;
     private String title;
     private String releaseYear;
     private String description;
@@ -31,7 +31,7 @@ public class MovieDetailsDto {
 
     public static Movie convertDtoToEntity(MovieDetailsDto dto){
         return Movie.builder()
-                .id(dto.getId())
+                .movieId(dto.getMovieId())
                 .title(dto.getTitle())
                 .releaseYear(dto.getReleaseYear())
                 .description(dto.getDescription())

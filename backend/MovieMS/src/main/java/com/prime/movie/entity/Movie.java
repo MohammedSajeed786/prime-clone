@@ -7,9 +7,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prime.movie.dto.MovieDetailsDto;
 import com.prime.movie.dto.MovieSummaryDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,9 +24,14 @@ import java.util.List;
 public class Movie {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+
+    private Integer movieId;
     private String title;
     private String releaseYear;
+    @Column(length = 1000)
     private String description;
     private String thumbnail;
     private String backdrop;
@@ -46,7 +49,7 @@ public class Movie {
 
     public static MovieDetailsDto convertEntityToDetailsDto(Movie entity){
         return MovieDetailsDto.builder()
-                .id(entity.getId())
+                .movieId(entity.getMovieId())
                 .title(entity.getTitle())
                 .releaseYear(entity.getReleaseYear())
                 .description(entity.getDescription())
@@ -64,7 +67,7 @@ public class Movie {
 
     public static MovieSummaryDto convertEntityToSummaryDto(Movie entity){
         return MovieSummaryDto.builder()
-                .id(entity.getId())
+                .movieId(entity.getMovieId())
                 .title(entity.getTitle())
                 .releaseYear(entity.getReleaseYear())
                 .description(entity.getDescription())

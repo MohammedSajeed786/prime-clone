@@ -5,22 +5,26 @@ import com.prime.movie.dto.MovieSummaryDto;
 import com.prime.movie.service.MovieService;
 import com.prime.movie.utility.MovieResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/movie")
+@CrossOrigin
 public class MovieController {
 
     @Autowired
     MovieService movieService;
 
     @PostMapping("/addMovies")
-    public ResponseEntity<MovieResponse> addMovies(List<MovieDetailsDto> movieDetailsDtoList){
+    public ResponseEntity<MovieResponse> addMovies(@RequestBody List<MovieDetailsDto> movieDetailsDtoList){
+        System.out.println(movieDetailsDtoList);
         movieService.addMovies(movieDetailsDtoList);
         MovieResponse<Object> movieResponse=MovieResponse.builder().status(201).message("movies successfully added").build();
         return new ResponseEntity<>(movieResponse, HttpStatus.CREATED);
@@ -40,4 +44,18 @@ public class MovieController {
         return new ResponseEntity<>(movieResponse, HttpStatus.OK);
 
     }
+
+    @GetMapping(value = "/trailer/{movieId}",produces = "video/mp4")
+    public ResponseEntity<Mono<Resource>> getTrailer( @PathVariable Integer movieId,@RequestHeader("Range") String range){
+        System.out.println(range);
+        return new ResponseEntity<>(movieService.getTrailer(movieId),HttpStatus.OK);
+    }
+    @GetMapping(value = "/fullMovie/{movieId}",produces = "video/mp4")
+    public ResponseEntity<Mono<Resource>> getFullMovie( @PathVariable Integer movieId,@RequestHeader("Range") String range){
+        System.out.println(range);
+        return new ResponseEntity<>(movieService.getFullMovie(movieId),HttpStatus.OK);
+    }
+
+
+
 }

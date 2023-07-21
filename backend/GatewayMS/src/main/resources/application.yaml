@@ -9,12 +9,12 @@ spring:
           uri: http://localhost:8001
           predicates:
             - Path=/auth/**
-        - id: DemoMS
+        - id: MovieMS
           uri: http://localhost:8002
           predicates:
-            - Path=/demo/**
-          filters:
-            - JwtAuthenticationFilter
+            - Path=/movie/**
+#          filters:
+#            - JwtAuthenticationFilter
 
 
 

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieSummaryDto {
-    private long id;
+    private Integer movieId;
     private String title;
     private String releaseYear;
     private String description;
@@ -21,7 +21,7 @@ public class MovieSummaryDto {
 
 
     public static Movie convertDtoToEntity(MovieSummaryDto dto) {
-        return Movie.builder().id(dto.getId()).title(dto.getTitle()).releaseYear(dto.getReleaseYear()).description(dto.getDescription()).thumbnail(dto.getThumbnail())
+        return Movie.builder().movieId(dto.getMovieId()).title(dto.getTitle()).releaseYear(dto.getReleaseYear()).description(dto.getDescription()).thumbnail(dto.getThumbnail())
                 .duration(dto.getDuration()).language(dto.getLanguage())
                 .build();
 
