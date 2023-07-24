@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --dark-blue: #1a98ffff;
+  --light-blue: #0f79afff;
+  --white: #ffffff;
+  --grey: #9f9f9fff;
+  --black-background: #00050d;
+  /* 003459 */
+
+  /* CSS HEX */
+  --black: #000000ff;
+  --white: #ffffffff;
+  --cadet-gray: #9f9f9fff;
+  --honolulu-blue: #0f79afff;
+  --pading-content: 65px;
+  --padding-content-mobile: 15px;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  background-color: var(--black-background);
+  color: var(--white);
+  margin: 0px;
+  padding: 0px;
+}

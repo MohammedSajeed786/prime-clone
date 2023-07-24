@@ -1,3 +1,14 @@
-.video-wrapper{
-    padding: 30px;
+.content{
+    color: var(--black-background);
+}
+
+.header-container{
+  height: 55px;
+  width: 100%;
+  background-color: var(--black-background);
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  transition: all 0.5s ease;
+  
 }

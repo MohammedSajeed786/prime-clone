@@ -42,6 +42,7 @@ public class Movie {
     private String language;
     private double rating;
     private String producer;
+
     private String director;
 
     @Lob
