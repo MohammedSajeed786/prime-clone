@@ -1,0 +1,55 @@
+.toast{
+    position: fixed;
+    right: 10px;
+    box-sizing: border-box;
+    top: 75px;
+    padding: 15px;
+    color: var(--dark-black);
+    background-color: var(--white);
+    width: 300px;
+    min-height: 40px;
+    /* text-align: center; */
+    font-weight: 600;
+    border-radius: 10px;
+    z-index: 1000;
+
+}
+.toast p{
+    display: inline;
+}
+
+.toast span{
+    position: relative;
+    top:7px;
+    margin-right: 5px;
+    transform: scale(0.65);
+}
+.done{
+    border:1.5px solid #28a745;
+}
+.warning{
+    border:1.5px solid #ffc107;
+}
+.error{
+    border: 1.5px solid #dc3545;
+}
+.info{
+    border: 1.5px solid #007bff
+}
+.icon-done{
+    display: inline;
+    color:#28a745;
+}
+
+.icon-warning{
+    display: inline;
+    color: #ffc107;
+}
+.icon-error{
+    display: inline;
+    color: red;
+}
+.icon-info{
+    display: inline;
+    color: rgb(79, 198, 245);
+}

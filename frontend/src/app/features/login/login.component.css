@@ -1,0 +1,118 @@
+.login {
+  padding: var(--padding-content);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  /* display: flex; */
+  padding: 0px 150px;
+  /* flex-direction: column; */
+  width: 50%;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 45px;
+  margin: 0px;
+  text-align: center;
+}
+p,
+a {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.registerButton {
+  background-color: var(--white);
+  color: var(--dark-black);
+  width: 350px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.loginForm {
+  width: 35%;
+  height: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(34, 34, 34, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(34, 34, 34, 1);
+}
+
+form {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 30px;
+}
+input {
+  display: block;
+
+  width: 400px;
+  background-color: transparent;
+  border: 1px solid #373839;
+  outline: none;
+  padding: 15px;
+  color: white;
+  height: 40px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  caret-color: var(--light-blue);
+}
+.forgot {
+  text-align: right;
+  text-decoration: none;
+  cursor: pointer;
+  width: 400px;
+}
+.loginButton {
+  background-color: var(--light-blue);
+  color: var(--white);
+  width: 400px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+input:focus {
+  border: 2px solid var(--light-blue);
+}
+.password span{
+    margin: 2px;
+    color: var(--grey);
+    display: inline-block;
+    cursor: pointer;
+}
+.icon{
+   
+        transform: scale(0.75,0.5);
+        position: relative;
+        top: 7px;
+       
+    
+}

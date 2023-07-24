@@ -1,5 +1,5 @@
 .header{
-    background-color: var(--black-background);
+    background-color: var(--dark-black);
     display: flex;
     flex-direction: row;
     padding: 10px 20px;

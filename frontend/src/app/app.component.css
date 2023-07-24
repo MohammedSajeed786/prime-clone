@@ -1,14 +1,14 @@
 .content{
-    color: var(--black-background);
+    color: var(--dark-black);
 }
 
 .header-container{
   height: 55px;
   width: 100%;
-  background-color: var(--black-background);
+  background-color: var(--dark-black);
   box-sizing: border-box;
   position: sticky;
   top: 0;
   transition: all 0.5s ease;
-  
+  z-index: 100;
 }

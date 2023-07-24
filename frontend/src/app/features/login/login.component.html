@@ -1,0 +1,37 @@
+<div class="login">
+  <div class="content">
+    <h2>Welcome Back</h2>
+    <p>
+      Login to unlock the full potential of your cinematic journey with
+      MovieVerse.
+    </p>
+    <div class="register">
+      <p>Don't have an account?</p>
+      <button class="registerButton">Register</button>
+    </div>
+  </div>
+
+  <div class="loginForm">
+    <h2>Login</h2>
+
+    <form action="" [formGroup]="loginForm">
+
+    <div class="email">
+      <input type="email" name="" id="" placeholder="Email ID" formControlName="email" />
+    </div>
+
+    <div class="password">
+      <input [type]="show?'text':'password'" name="" id="" placeholder="Password" formControlName="password"/>
+      <span (click)="show=!show">
+        <span class="material-symbols-outlined icon">
+            {{show?'visibility_off':'visibility'}}
+        </span>
+        {{show?"hide":"show"}} password
+      </span>
+    </div>
+
+      <a class="forgot">Forgot password?</a>
+      <button class="loginButton" (click)="login()">Login</button>
+    </form>
+  </div>
+</div>

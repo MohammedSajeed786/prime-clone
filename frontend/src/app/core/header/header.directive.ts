@@ -16,7 +16,7 @@ export class HeaderDirective {
     }
     else{
       this.el.nativeElement.style.top = '0px';
-      this.el.nativeElement.style.backgroundColor= 'var(--black-background)';
+      this.el.nativeElement.style.backgroundColor= 'var(--dark-black)';
       
     }
   }

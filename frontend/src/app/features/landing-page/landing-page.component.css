@@ -1,31 +1,28 @@
-.welcome{
-    box-sizing: border-box;
-   
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 600px;
-    background-image: url("../../../assets/inline-11-.jpg");
-    background-repeat: no-repeat;
-    background-position: 200% 0%;
-     background-color: rgba(0, 0, 0, 0.5); 
-     flex-wrap: wrap;
+.welcome {
+  box-sizing: border-box;
 
-    /* background-blend-mode: multiply; */
-}
-.content{
-    padding: 0px var(--pading-content);
-  
-}
-.welcome-text{
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 30px;
-    max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 600px;
+  background-image: url("../../../assets/inline-11-.jpg");
+  background-repeat: no-repeat;
+  background-position: 200% 0%;
+  background-color: rgba(0, 0, 0, 0.5);
+  flex-wrap: wrap;
 
-   
+  /* background-blend-mode: multiply; */
 }
-.signin{
+.content {
+  padding: 0px var(--padding-content);
+}
+.welcome-text {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+  max-width: 800px;
+}
+.signin {
   background-color: var(--light-blue);
   width: 300px;
   color: var(--white);
@@ -33,35 +30,32 @@
   border-radius: 5px;
   border: none;
   font-size: 20px;
+  cursor: pointer;
 }
 
-@media screen and (max-width:1200px) {
-    .welcome{
-        align-items: center;
-        background-position: center;
-    }
-   
+@media screen and (max-width: 1200px) {
+  .welcome {
+    align-items: center;
+    background-position: center;
+  }
 }
 
-@media screen and (max-width:767px) {
-    .welcome-text{
-       
-        font-size: 20px !important;
-      
-    }
+@media screen and (max-width: 767px) {
+  .welcome-text {
+    font-size: 20px !important;
+  }
 
-    .signin{
-        font-size: 15px !important;
-        width: 200px;
-    }
-    .content{
-        padding:0px var(--padding-content-mobile);
-    }
+  .signin {
+    font-size: 15px !important;
+    width: 200px;
+  }
+  .content {
+    padding: 0px var(--padding-content-mobile);
+  }
 }
 
-@media screen and (max-width:400px) {
-    .content{
-        padding: 5px 5px;
-    }
-    
+@media screen and (max-width: 400px) {
+  .content {
+    padding: 5px 5px;
+  }
 }

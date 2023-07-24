@@ -1,0 +1,7 @@
+<div [class]="'toast ' + toast.type" *ngIf="toast.showToast">
+  <div [class]="'icon-' + toast.type">
+    <span class="material-symbols-outlined"> {{ toast.type }} </span>
+  </div>
+
+  <p>{{ toast.message }}</p>
+</div>

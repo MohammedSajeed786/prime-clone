@@ -4,7 +4,8 @@
   --light-blue: #0f79afff;
   --white: #ffffff;
   --grey: #9f9f9fff;
-  --black-background: #00050d;
+  --dark-black: #00050d;
+  --light-black:#222222;
   /* 003459 */
 
   /* CSS HEX */
@@ -12,13 +13,13 @@
   --white: #ffffffff;
   --cadet-gray: #9f9f9fff;
   --honolulu-blue: #0f79afff;
-  --pading-content: 65px;
+  --padding-content: 65px;
   --padding-content-mobile: 15px;
 }
 
 body {
   font-family: "Nunito Sans", sans-serif;
-  background-color: var(--black-background);
+  background-color: var(--dark-black);
   color: var(--white);
   margin: 0px;
   padding: 0px;

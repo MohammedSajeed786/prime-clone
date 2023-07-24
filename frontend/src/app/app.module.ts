@@ -7,17 +7,23 @@ import {HttpClientModule} from '@angular/common/http'
 import { CoreModule } from './core/core.module';
 import { LandingPageComponent } from './features/landing-page/landing-page.component';
 import { LandingPageModule } from './features/landing-page/landing-page.module';
+import { LoginModule } from './features/login/login.module';
+import { ToastComponent } from './shared/toast/toast.component';
+import { ToastModule } from './shared/toast/toast.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    LandingPageModule
+    LandingPageModule,
+    LoginModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]
