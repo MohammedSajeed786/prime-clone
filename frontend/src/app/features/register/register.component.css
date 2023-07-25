@@ -1,7 +1,7 @@
-.login {
+.register {
   padding: var(--padding-content);
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
   margin: 20px 0px;
@@ -17,8 +17,6 @@
   box-sizing: border-box;
 }
 
-
-
 h2 {
   font-size: 45px;
   margin: 0px;
@@ -30,14 +28,14 @@ a {
   font-weight: 600;
   text-align: center;
 }
-.register {
+.login {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
 }
 
-.registerButton {
+.loginButton {
   background-color: var(--white);
   color: var(--dark-black);
   width: 350px;
@@ -50,7 +48,7 @@ a {
   cursor: pointer;
 }
 
-.loginForm {
+.registerForm {
   width: 480px;
   min-height: 430px;
   padding: 20px;
@@ -62,7 +60,7 @@ a {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(34, 34, 34, 1);
 }
-.loginForm h2{
+.registerForm h2 {
   color: var(--light-blue);
 }
 form {
@@ -105,7 +103,7 @@ input {
   cursor: pointer;
   width: 400px;
 }
-.loginButton {
+.registerButton {
   background-color: var(--light-blue);
   color: var(--white);
   width: 400px;
@@ -118,16 +116,16 @@ input {
   cursor: pointer;
   box-sizing: border-box;
 }
-.loginButton:disabled{
+.registerButton:disabled {
   cursor: no-drop;
-  background-color:#678cc0;
+  background-color: #678cc0;
 }
 input:focus {
   border-color: var(--light-blue);
   /* border-width: 0px 0px 2px 0px;
-  border-radius: 0px; */
+    border-radius: 0px; */
 }
-.password .eye {
+.eye {
   margin: 2px;
   color: var(--grey);
   display: inline-block;
@@ -143,19 +141,18 @@ input:focus {
     /* padding: 0% 5%; */
     width: 370px;
   }
-  .registerButton {
+  .loginButton {
     width: 300px;
   }
   input,
-  .loginButton,
+  .registerButton,
   .forgot,
   .error {
     width: 330px;
   }
-  .loginForm {
+  .registerForm {
     width: 400px;
     /* min-height: 430px; */
-  
   }
   form {
     /* margin-top: 50px; */
@@ -167,16 +164,16 @@ input:focus {
     padding: 0% var(--padding-content-ipad);
   }
   input,
-  .loginButton,
+  .registerButton,
   .forgot,
   .error {
     width: 300px;
   }
-  .registerButton {
+  .loginButton {
     width: 250px;
   }
 
-  .loginForm {
+  .registerForm {
     width: 360px;
     /* padding: 45px 20px; */
   }
@@ -191,7 +188,7 @@ input:focus {
   }
 }
 @media screen and (max-width: 767px) {
-  .login {
+  .register {
     flex-direction: column;
     row-gap: 35px;
   }
@@ -201,12 +198,12 @@ input:focus {
 }
 
 @media screen and (max-width: 481px) {
-  .loginForm {
+  .registerForm {
     width: 350px;
     /* min-height: 430px; */
   }
   input,
-  .loginButton,
+  .registerButton,
   .forgot,
   .error {
     width: 270px;

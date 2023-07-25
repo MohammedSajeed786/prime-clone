@@ -12,26 +12,57 @@
   </div>
 
   <div class="loginForm">
-    <h2>Login</h2>
+    <h2 >Login</h2>
 
     <form action="" [formGroup]="loginForm">
-
-    <div class="email">
-      <input type="email" name="" id="" placeholder="Email ID" formControlName="email" />
-    </div>
-
-    <div class="password">
-      <input [type]="show?'text':'password'" name="" id="" placeholder="Password" formControlName="password"/>
-      <span (click)="show=!show">
-        <span class="material-symbols-outlined icon">
-            {{show?'visibility_off':'visibility'}}
+      <div class="email">
+        <input
+          type="email"
+          name=""
+          id=""
+          placeholder="Email ID"
+          formControlName="email"
+        />
+        <span
+          class="error"
+          *ngIf="
+            loginForm.controls['email'].errors &&
+            loginForm.controls['email'].dirty
+          "
+        >
+          email is invalid
         </span>
-        {{show?"hide":"show"}} password
+      </div>
+
+      <div class="password">
+        <input
+          [type]="show ? 'text' : 'password'"
+          name=""
+          id=""
+          placeholder="Password"
+          formControlName="password"
+        />
+        <span (click)="show = !show" class="eye">
+          <span class="material-symbols-outlined icon">
+            {{ show ? "visibility_off" : "visibility" }}
+          </span>
+          {{ show ? "hide" : "show" }} password
+        </span>
+        <span
+        class="error"
+        *ngIf="
+          loginForm.controls['password'].errors &&
+          loginForm.controls['password'].dirty
+        "
+      >
+        password must contain atleast one capital letter, one small letter,
+        one digit, one special character and it must have atleast 8
+        characters.
       </span>
-    </div>
+      </div>
 
       <a class="forgot">Forgot password?</a>
-      <button class="loginButton" (click)="login()">Login</button>
+      <button class="loginButton" (click)="login()" [disabled]="loginForm.invalid || loginForm.untouched">Login</button>
     </form>
   </div>
 </div>

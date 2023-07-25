@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface Toast{
-  showToast:boolean,
-  message:string,
-  type:string
+export interface Toast {
+  showToast: boolean;
+  message: string;
+  type: string;
 }
 @Injectable({
   providedIn: 'root',
@@ -18,11 +18,17 @@ export class ToastService {
 
   constructor() {}
 
-  getToast():Observable<Toast>{
+  getToast(): Observable<Toast> {
+    // console.log("get")
+    // console.log(this.toast$);
+
     return this.toast$.asObservable();
   }
 
   setToast(val: Toast) {
+    // console.log("set")
+    // console.log(this.toast$);
+
     this.toast$.next(val);
   }
 
@@ -41,7 +47,7 @@ export class ToastService {
       type: type,
     });
     setTimeout(() => {
-      // this.hideToast();
+      this.hideToast();
     }, 5000);
   }
 }

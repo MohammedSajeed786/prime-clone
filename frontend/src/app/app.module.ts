@@ -11,10 +11,10 @@ import { LoginModule } from './features/login/login.module';
 import { ToastComponent } from './shared/toast/toast.component';
 import { ToastModule } from './shared/toast/toast.module';
 
+
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent
   ],
   imports: [
     BrowserModule,

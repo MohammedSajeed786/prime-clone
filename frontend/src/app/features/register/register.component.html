@@ -1,0 +1,124 @@
+<div class="register">
+  <div class="content">
+    <h2>Hey, Buddy</h2>
+    <p>Start your cinematic journey with MovieVerse.</p>
+    <div class="Login">
+      <p>Already have an account?</p>
+      <button class="loginButton">Login</button>
+    </div>
+  </div>
+
+  <div class="registerForm">
+    <h2>Register</h2>
+
+    <form action="" [formGroup]="registerForm">
+      <div class="email">
+        <input
+          type="email"
+          name=""
+          id=""
+          placeholder="Email ID"
+          formControlName="email"
+        />
+        <span
+          class="error"
+          *ngIf="
+            registerForm.controls['email'].errors &&
+            registerForm.controls['email'].dirty
+          "
+        >
+          email is invalid
+        </span>
+      </div>
+      <div class="username">
+        <input
+          type="text"
+          name=""
+          id=""
+          placeholder="Username"
+          formControlName="username"
+        />
+        <span
+          class="error"
+          *ngIf="
+            registerForm.controls['username'].errors &&
+            registerForm.controls['username'].dirty
+          "
+        >
+          username is required
+        </span>
+      </div>
+      <div class="fullName">
+        <input
+          type="text"
+          name=""
+          id=""
+          placeholder="Full Name"
+          formControlName="fullName"
+        />
+        <span
+          class="error"
+          *ngIf="
+            registerForm.controls['fullName'].errors &&
+            registerForm.controls['fullName'].dirty
+          "
+        >
+          full name is required
+        </span>
+      </div>
+
+      <div class="password">
+        <input
+          [type]="show ? 'text' : 'password'"
+          name=""
+          id=""
+          placeholder="Password"
+          formControlName="password"
+        />
+        <span
+          class="error"
+          *ngIf="
+            registerForm.controls['password'].errors &&
+            registerForm.controls['password'].dirty
+          "
+        >
+          password must contain atleast one capital letter, one small letter,
+          one digit, one special character and it must have atleast 8
+          characters.
+        </span>
+      </div>
+      <div class="confirmPassword">
+        <input
+          [type]="show ? 'text' : 'password'"
+          name=""
+          id=""
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+        />
+        <span (click)="show = !show" class="eye">
+          <span class="material-symbols-outlined icon">
+            {{ show ? "visibility_off" : "visibility" }}
+          </span>
+          {{ show ? "hide" : "show" }} password
+        </span>
+        <span
+          class="error"
+          *ngIf="
+            registerForm.controls['password'].value !=
+            registerForm.controls['confirmPassword'].value
+          "
+        >
+          password and confirm password should match.
+        </span>
+      </div>
+
+      <button
+        class="registernButton"
+        (click)="register()"
+        [disabled]="registerForm.invalid || registerForm.untouched"
+      >
+        Register
+      </button>
+    </form>
+  </div>
+</div>

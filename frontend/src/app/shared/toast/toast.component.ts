@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Toast, ToastService } from './toast.service';
 
 @Component({
@@ -6,18 +7,27 @@ import { Toast, ToastService } from './toast.service';
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.css'],
 })
-export class ToastComponent implements OnInit {
+export class ToastComponent implements OnInit, OnDestroy {
   toast: Toast = {
     message: '',
     type: '',
     showToast: false,
   };
 
+  toastSubscription!: Subscription;
+
   constructor(private toastService: ToastService) {}
+  ngOnDestroy(): void {
+    this.toastSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
+    // console.log('inside ngOnInit');
     this.toastService.getToast().subscribe({
-      next: (toast) => (this.toast = toast),
+      next: (toast) => {
+        // console.log('next');
+        this.toast = toast;
+      },
     });
   }
 }
