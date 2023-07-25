@@ -1,15 +1,16 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register.component';
 
+
+
 @NgModule({
-  declarations: [],
+  declarations: [RegisterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-  exports: [RegisterComponent],
+  exports:[RegisterComponent]
 })
-export class RegisterModule {}
+export class RegisterModule { }

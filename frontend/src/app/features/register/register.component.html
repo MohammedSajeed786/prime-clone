@@ -104,8 +104,9 @@
         <span
           class="error"
           *ngIf="
+            registerForm.controls['confirmPassword'].dirty &&
             registerForm.controls['password'].value !=
-            registerForm.controls['confirmPassword'].value
+              registerForm.controls['confirmPassword'].value
           "
         >
           password and confirm password should match.
@@ -113,9 +114,14 @@
       </div>
 
       <button
-        class="registernButton"
+        class="registerButton"
         (click)="register()"
-        [disabled]="registerForm.invalid || registerForm.untouched"
+        [disabled]="
+          registerForm.invalid ||
+          registerForm.untouched ||
+          registerForm.controls['password'].value !=
+            registerForm.controls['confirmPassword'].value
+        "
       >
         Register
       </button>
