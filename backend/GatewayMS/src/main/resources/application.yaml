@@ -4,11 +4,19 @@ server:
 spring:
   cloud:
     gateway:
+      globalCors:
+        cors-configurations:
+          '[/**]': # Define a unique key for your CORS configuration
+            allowedOriginPatterns: "*" # Allow requests from all origins
+            allowedMethods: "*" # Allow all HTTP methods
+            allowedHeaders: "*" # Allow all request headers
+            allowCredentials: true
       routes:
         - id: CustomerMS
           uri: http://localhost:8001
           predicates:
             - Path=/auth/**
+
         - id: MovieMS
           uri: http://localhost:8002
           predicates:

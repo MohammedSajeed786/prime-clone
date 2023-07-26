@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@CrossOrigin
 public class GatewayMsApplication {
 
 	public static void main(String[] args) {

@@ -4,7 +4,7 @@
     <p>Start your cinematic journey with MovieVerse.</p>
     <div class="Login">
       <p>Already have an account?</p>
-      <button class="loginButton">Login</button>
+      <button class="loginButton" [routerLink]="['/login']">Login</button>
     </div>
   </div>
 
@@ -45,7 +45,8 @@
             registerForm.controls['username'].dirty
           "
         >
-          username is required
+          username should have atleast 5 characters
+
         </span>
       </div>
       <div class="fullName">
@@ -63,7 +64,7 @@
             registerForm.controls['fullName'].dirty
           "
         >
-          full name is required
+          full name should have atleast 5 characters
         </span>
       </div>
 

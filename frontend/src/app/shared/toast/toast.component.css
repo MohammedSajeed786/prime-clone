@@ -12,6 +12,10 @@
     font-weight: 600;
     border-radius: 10px;
     z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    
 
 }
 .toast p{
@@ -20,7 +24,7 @@
 
 .toast span{
     position: relative;
-    top:7px;
+    top:20px;
     margin-right: 5px;
     transform: scale(0.65);
 }

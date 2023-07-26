@@ -11,18 +11,13 @@ import org.springframework.stereotype.Component;
 public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAuthenticationFilter.Config> {
 
     @Autowired
+    RouteValidator routeValidator;
+    @Autowired
     private JwtService jwtService;
 
-   @Autowired
-   RouteValidator routeValidator;
-
-   public JwtAuthenticationFilter(){
-       super(Config.class);
-   }
-
-
-
-
+    public JwtAuthenticationFilter() {
+        super(Config.class);
+    }
 
 
     @Override
@@ -42,7 +37,7 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
                 String userId = jwtService.extractUsername(jwtToken); // Extract user_id from token
 
                 if (userId != null) {
-                    // Code block executed if userId is NOT null and user is NOT already authenticated
+                    // Code block executed if userId is NOT null
                     if (jwtService.isTokenValid(jwtToken, userId)) {
                         // If token is valid
                         exchange.getRequest().mutate()
