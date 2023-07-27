@@ -2,10 +2,13 @@ package com.prime.movie.controller;
 
 import com.prime.movie.dto.MovieDetailsDto;
 import com.prime.movie.dto.MovieSummaryDto;
+import com.prime.movie.entity.Movie;
 import com.prime.movie.service.MovieService;
+import com.prime.movie.utility.MovieListResponse;
 import com.prime.movie.utility.MovieResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +19,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movie")
-@CrossOrigin
 public class MovieController {
 
     @Autowired
@@ -37,6 +39,15 @@ public class MovieController {
         return new ResponseEntity<>(movieResponse, HttpStatus.OK);
 
     }
+
+    @GetMapping("/allMovies")
+    public ResponseEntity<MovieListResponse> getAllMovies(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "20") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "ASC")Sort.Direction direction){
+
+       List<MovieSummaryDto> movies= movieService.getAllMovies(page,pageSize,sortBy,direction);
+        MovieListResponse movieListResponse= MovieListResponse.builder().movies(movies).pageSize(movies.size()).currentPage(page).totalResults(movieService.getTotalMovies()).build();
+        return new ResponseEntity<>(movieListResponse,HttpStatus.OK);
+
+    }
     @GetMapping("/movieDetails/{movieId}")
     public ResponseEntity<MovieResponse> getMovieDetails(@PathVariable Integer movieId){
         MovieDetailsDto movieDetailsDto=movieService.getMovieDetails(movieId);
@@ -55,6 +66,7 @@ public class MovieController {
         System.out.println(range);
         return new ResponseEntity<>(movieService.getFullMovie(movieId),HttpStatus.OK);
     }
+
 
 
 

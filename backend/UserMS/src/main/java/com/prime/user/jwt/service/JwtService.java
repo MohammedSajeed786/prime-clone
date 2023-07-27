@@ -23,6 +23,7 @@ public class JwtService {
 
 
     public String generateToken(Map<String,Object> extraClaims, UserDetails userDetails){
+//        System.out.println("hello "+SECRET_KEY);
 
         return Jwts
                 .builder()

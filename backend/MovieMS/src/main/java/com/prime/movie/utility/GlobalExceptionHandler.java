@@ -18,11 +18,18 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler({MovieException.class})
-    public ResponseEntity<ErrorInfo> UserExceptionHandler(Exception exception){
+    public ResponseEntity<ErrorInfo> movieExceptionHandler(Exception exception){
 //        System.out.println("inside handler");
         ErrorInfo errorInfo=ErrorInfo.builder().message(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value()).error(HttpStatus.BAD_REQUEST.getReasonPhrase()).timestamp(LocalDateTime.now().toString()).build();
         return new ResponseEntity<>(errorInfo,HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler({RuntimeException.class})
+    public ResponseEntity<ErrorInfo> runtimeExceptionHandler(Exception exception){
+//        System.out.println("inside handler");
+        ErrorInfo errorInfo=ErrorInfo.builder().message(exception.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value()).error(HttpStatus.BAD_REQUEST.getReasonPhrase()).timestamp(LocalDateTime.now().toString()).build();
+        return new ResponseEntity<>(errorInfo,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -49,4 +56,5 @@ public class GlobalExceptionHandler {
         // Return a ResponseEntity with the ErrorInfo object and the appropriate status code
         return new ResponseEntity<>(errorInfo,HttpStatus.BAD_REQUEST);
     }
+
 }

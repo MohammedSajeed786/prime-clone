@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private toastService: ToastService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -41,13 +43,17 @@ export class RegisterComponent implements OnInit {
     });
   }
   register() {
+    this.spinner.show();
+
     this.registerSubscription=this.authService.register(this.registerForm.value).subscribe({
       next: (res) => {
+        this.spinner.hide();
         this.authService.setToken(res.token);
         this.toastService.setToastData('done', 'Welcome buddy');
         this.router.navigate(['/catalog']);
       },
       error: (error) => {
+        this.spinner.hide();
         this.toastService.setToastData('warning', error.error.message);
       },
     });

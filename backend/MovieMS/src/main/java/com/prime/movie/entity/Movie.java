@@ -48,6 +48,8 @@ public class Movie {
     @Lob
     private String casts;
 
+    private Double price;
+
     public static MovieDetailsDto convertEntityToDetailsDto(Movie entity){
         return MovieDetailsDto.builder()
                 .movieId(entity.getMovieId())
@@ -63,6 +65,7 @@ public class Movie {
                 .producer(entity.getProducer())
                 .director(entity.getDirector())
                 .casts(entity.convertStringToList(entity.getCasts()))
+                .price(entity.getPrice())
                 .build();
     }
 

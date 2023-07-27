@@ -1,0 +1,9 @@
+<div class="dialog-backdrop" *ngIf="show">
+<div class="dialog-container">
+  <p class="dialog-message">{{ dialogText.message }}</p>
+  <div class="dialog-buttons">
+    <button class="ok" (click)="okClicked()">{{ dialogText.okText }}</button>
+    <button class="cancel" (click)="cancelClicked()">{{ dialogText.cancelText }}</button>
+  </div>
+</div>
+</div>

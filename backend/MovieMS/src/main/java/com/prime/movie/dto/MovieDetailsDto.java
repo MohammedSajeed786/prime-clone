@@ -28,8 +28,9 @@ public class MovieDetailsDto {
     private String producer;
     private String director;
     private List<String> casts;
+    private Double price;
 
-    public static Movie convertDtoToEntity(MovieDetailsDto dto){
+    public static Movie convertDtoToEntity(MovieDetailsDto dto) {
         return Movie.builder()
                 .movieId(dto.getMovieId())
                 .title(dto.getTitle())
@@ -44,12 +45,14 @@ public class MovieDetailsDto {
                 .producer(dto.getProducer())
                 .director(dto.getDirector())
                 .casts(dto.convertListToString(dto.getCasts()))
+                .price(dto.getPrice())
                 .build();
     }
+
     public String convertListToString(List<String> stringList) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-           return objectMapper.writeValueAsString(stringList);
+            return objectMapper.writeValueAsString(stringList);
         } catch (JsonProcessingException e) {
             // Handle the exception
         }

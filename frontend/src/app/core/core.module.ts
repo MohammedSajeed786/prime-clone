@@ -4,6 +4,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderDirective } from './components/header/header.directive';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { DialogModule } from '../shared/components/dialog/dialog.module';
 
 
 
@@ -15,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    DialogModule
   ],
   exports:[HeaderComponent,HeaderDirective,FooterComponent]
 })

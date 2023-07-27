@@ -21,8 +21,8 @@ spring:
           uri: http://localhost:8002
           predicates:
             - Path=/movie/**
-#          filters:
-#            - JwtAuthenticationFilter
+          filters:
+            - JwtAuthenticationFilter
 
 
 

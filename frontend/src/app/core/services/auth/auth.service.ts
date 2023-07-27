@@ -12,7 +12,7 @@ export interface AuthResponse {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService  {
+export class AuthService {
   private url = environment.apiUrl;
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor(private http: HttpClient, private router: Router) {
@@ -20,8 +20,6 @@ export class AuthService  {
       this.setisLoggedIn$(true);
     }
   }
-
- 
 
   login(body: any): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.url + 'auth/login', body);

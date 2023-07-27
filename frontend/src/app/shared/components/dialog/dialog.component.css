@@ -1,0 +1,49 @@
+.dialog-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dialog-container{
+   width:500px;
+   min-height:200px;
+   background-color: var(--navy-blue);
+   border-radius: 10px;
+   padding: 30px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.dialog-container p::first-letter{
+    text-transform: uppercase;
+}
+.dialog-buttons{
+    margin-top: auto;
+    margin-left: auto;
+    /* justify-self: flex-end;
+    align-items: flex-end; */
+}
+
+.dialog-buttons{
+   display: flex;
+   flex-direction: row;
+   column-gap: 20px;
+}
+.dialog-buttons button{
+   color: var(--white);
+   background-color:var(--light-blue);
+   border: none;
+   min-width: 100px;
+   height: 30px;
+   border-radius: 5px;
+   cursor: pointer;
+   text-transform: capitalize;
+   font-weight: 600;
+}

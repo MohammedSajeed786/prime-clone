@@ -43,6 +43,7 @@ public class JwtService {
 
     }
     private Claims extractAllClaims(String jwtToken){
+//        System.out.println(SECRET_KEY);
         try {
             return Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(jwtToken).getBody();
         }catch (Exception e){
@@ -54,7 +55,6 @@ public class JwtService {
     private Key getSignInKey() {
 //        String SECRET_KEY=System.getenv("SECRET");
 //        String SECRET=environment.getProperty("SECRET");
-//        System.out.println(SECRET_KEY);
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
     }
 

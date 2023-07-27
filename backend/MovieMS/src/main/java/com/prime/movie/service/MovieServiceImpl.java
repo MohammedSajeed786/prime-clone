@@ -10,6 +10,10 @@ import com.prime.movie.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -52,7 +56,7 @@ public class MovieServiceImpl implements MovieService {
             int index = random.nextInt(5);
             MovieMedia movieMedia = MovieMedia.builder().movie(Movie.builder().movieId(movieDetailsDto.getMovieId()).build()).trailerPath(trailers[index]).moviePath(movies[index]).build();
 
-          movieMediaList.add(movieMedia);
+            movieMediaList.add(movieMedia);
 
         });
         movieRepository.saveAll(movieList);
@@ -77,29 +81,60 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Mono<Resource> getTrailer(Integer movieId) {
-        Optional<MovieMedia> movieMedia= movieMediaRepository.findByMovieId(movieId);
-        if(movieMedia.isPresent()){
-            String path=movieMedia.get().getTrailerPath();
+        Optional<MovieMedia> movieMedia = movieMediaRepository.findByMovieId(movieId);
+        if (movieMedia.isPresent()) {
+            String path = movieMedia.get().getTrailerPath();
             return Mono.fromSupplier(() -> this.resourceLoader.getResource(path));
-        }
-        else{
-            throw  new MovieException("movie not found");
+        } else {
+            throw new MovieException("movie not found");
         }
 
 
     }
+
     @Override
     public Mono<Resource> getFullMovie(Integer movieId) {
-        Optional<MovieMedia> movieMedia= movieMediaRepository.findByMovieId(movieId);
-        if(movieMedia.isPresent()){
-            String path=movieMedia.get().getMoviePath();
+        Optional<MovieMedia> movieMedia = movieMediaRepository.findByMovieId(movieId);
+        if (movieMedia.isPresent()) {
+            String path = movieMedia.get().getMoviePath();
             return Mono.fromSupplier(() -> this.resourceLoader.getResource(path));
-        }
-        else{
-            throw  new MovieException("movie not found");
+        } else {
+            throw new MovieException("movie not found");
         }
 
 
+    }
+
+    @Override
+    public List<MovieSummaryDto> getAllMovies(Integer page, Integer pageSize, String sortBy, Sort.Direction direction) {
+        //logic to check page is valid
+        Long totalResults = getTotalMovies();
+        Long totalPages = totalResults / pageSize;
+        if (totalResults % pageSize != 0) totalPages++;
+        if (totalPages < page) throw new MovieException("invalid page number");
+        else {
+            //fetch the page data;
+            page--; //since the pages will have 0-index
+
+            Pageable pageable = PageRequest.of(page, pageSize, Sort.by(direction, sortBy));
+
+            Page<Movie> pageData = movieRepository.findAll(pageable);
+            List<MovieSummaryDto> movieSummaryDtos = new ArrayList<>();
+            if (pageData.hasContent()) {
+                List<Movie> movieList = pageData.getContent();
+                movieList.stream().forEach((movie) -> {
+                    movieSummaryDtos.add(Movie.convertEntityToSummaryDto(movie));
+                });
+                return movieSummaryDtos;
+            } else throw new RuntimeException("some error occurred");
+        }
+
+
+    }
+
+    @Override
+    public Long getTotalMovies() {
+        return movieRepository.count();
     }
 
 }
