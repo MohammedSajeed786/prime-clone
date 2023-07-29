@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
 
                 String jwtToken = authHeader.substring(7); // Pick the token
                 String userId = jwtService.extractUsername(jwtToken); // Extract user_id from token
-                
+
                 if (userId != null) {
                     // Code block executed if userId is NOT null
                     if (jwtService.isTokenValid(jwtToken, userId)) {

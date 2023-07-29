@@ -1,5 +1,6 @@
 package com.prime.movie.controller;
 
+import com.prime.movie.dto.MovieByGenreDto;
 import com.prime.movie.dto.MovieDetailsDto;
 import com.prime.movie.dto.MovieSummaryDto;
 import com.prime.movie.entity.Movie;
@@ -16,6 +17,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/movie")
@@ -26,7 +28,7 @@ public class MovieController {
 
     @PostMapping("/addMovies")
     public ResponseEntity<MovieResponse> addMovies(@RequestBody List<MovieDetailsDto> movieDetailsDtoList){
-        System.out.println(movieDetailsDtoList);
+//        System.out.println("hello " +movieDetailsDtoList);
         movieService.addMovies(movieDetailsDtoList);
         MovieResponse<Object> movieResponse=MovieResponse.builder().status(201).message("movies successfully added").build();
         return new ResponseEntity<>(movieResponse, HttpStatus.CREATED);
@@ -41,7 +43,7 @@ public class MovieController {
     }
 
     @GetMapping("/allMovies")
-    public ResponseEntity<MovieListResponse> getAllMovies(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "20") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "ASC")Sort.Direction direction){
+    public ResponseEntity<MovieListResponse> getAllMovies(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "20") Integer pageSize, @RequestParam(defaultValue = "movieId") String sortBy, @RequestParam(defaultValue = "ASC")Sort.Direction direction){
 
        List<MovieSummaryDto> movies= movieService.getAllMovies(page,pageSize,sortBy,direction);
         MovieListResponse movieListResponse= MovieListResponse.builder().movies(movies).pageSize(movies.size()).currentPage(page).totalResults(movieService.getTotalMovies()).build();
@@ -58,16 +60,28 @@ public class MovieController {
 
     @GetMapping(value = "/trailer/{movieId}",produces = "video/mp4")
     public ResponseEntity<Mono<Resource>> getTrailer( @PathVariable Integer movieId,@RequestHeader("Range") String range){
-        System.out.println(range);
+//        System.out.println(range);
         return new ResponseEntity<>(movieService.getTrailer(movieId),HttpStatus.OK);
     }
     @GetMapping(value = "/fullMovie/{movieId}",produces = "video/mp4")
     public ResponseEntity<Mono<Resource>> getFullMovie( @PathVariable Integer movieId,@RequestHeader("Range") String range){
-        System.out.println(range);
+//        System.out.println(range);
         return new ResponseEntity<>(movieService.getFullMovie(movieId),HttpStatus.OK);
     }
 
+  @GetMapping("/genres")
+    public ResponseEntity<MovieResponse> getGenres(){
+        List<String> genres=movieService.getGenres();
 
+        return  new ResponseEntity<>(MovieResponse.builder().data(genres).message("genres fetched successfully").status(200).build(),HttpStatus.OK);
+  }
+
+  @GetMapping("/genres/movies")
+    public  ResponseEntity<MovieResponse> getMoviesGroupedByGenres(){
+      List<MovieByGenreDto> moviesByGenre=movieService.groupMoviesByGenre();
+      return  new ResponseEntity<>(MovieResponse.builder().data(moviesByGenre).message("movies fetched successfully").status(200).build(),HttpStatus.OK);
+
+  }
 
 
 }

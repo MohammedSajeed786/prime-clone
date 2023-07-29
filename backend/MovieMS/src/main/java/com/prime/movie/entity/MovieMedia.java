@@ -20,7 +20,7 @@ public class MovieMedia {
     Integer movieMediaId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "movieId", referencedColumnName = "id")
+    @JoinColumn(name = "movieId", referencedColumnName = "movieId")
     Movie movie;
 
     @Column(length = 1000)

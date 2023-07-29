@@ -1,0 +1,16 @@
+<div class="movie-item-container">
+  <div class="thumbnail">
+    <img [src]="movieInfo.thumbnail" alt="" />
+  </div>
+  <div class="about">
+    <div class="title">{{ movieInfo.title }}</div>
+    <div class="other-details">
+      <span class="release">{{ movieInfo.releaseYear }}</span>
+      <span class="duration">{{ movieInfo.duration | duration }}</span>
+      <span class="age">U/A 13+</span>
+    </div>
+    <div class="description">
+      {{ movieInfo.description | slice:0:100 }}...
+    </div>
+  </div>
+</div>

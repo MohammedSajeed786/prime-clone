@@ -2,29 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { MovieCatalogService } from './movie-catalog.service';
 import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/shared/interfaces/MovieListResponse';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 
 @Component({
   selector: 'app-movie-catalog',
   templateUrl: './movie-catalog.component.html',
   styleUrls: ['./movie-catalog.component.css'],
 })
-export class MovieCatalogComponent implements OnInit{
+export class MovieCatalogComponent implements OnInit {
+  movieResponseSubscription!: Subscription;
 
-  movieListSubscription!:Subscription;
+  moviesByGenreList!: {genre:string,movies:Movie[]}[];
 
-  movieList!:Movie[]
+  constructor(
+    private movieCatalogService: MovieCatalogService,
+    private toastService: ToastService
+  ) {}
 
-  constructor(private movieCatalogService: MovieCatalogService) {}
+  ngOnInit() {
+    this.movieResponseSubscription = this.movieCatalogService
+      .getAllMoviesGroupedByGenres()
+      .subscribe({
+        next: (value) => {
+          this.moviesByGenreList = value.data;
+          
+         
+        },
+        error: (err) => {
+          this.toastService.setToastData('error', err.error.message);
+        },
+      });
+  }
 
-  ngOnInit(){
-   this.movieListSubscription=this.movieCatalogService.getAllMovies().subscribe({
-    next:(value)=> {
-        console.log(value)
-         this.movieList=value.movies;
-    },
-    error:(err)=> {
-        console.log(err)
-    },
-   })
+  ngOnDestroy() {
+    this.movieResponseSubscription.unsubscribe();
   }
 }

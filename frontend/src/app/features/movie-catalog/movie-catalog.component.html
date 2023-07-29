@@ -1,5 +1,21 @@
 <div class="catalog">
-    <div class="movies-container">
-        
+  <div class="movie-list-container-wrapper">
+    <div
+      class="movie-list-container"
+      *ngFor="let genreMovies of moviesByGenreList"
+    >
+      <div class="details">
+        <p class="genre">{{ genreMovies.genre }}</p>
+        <div class="see-more">
+          <p>See more</p>
+          <span class="material-symbols-outlined icon"> chevron_right </span>
+        </div>
+      </div>
+      <div class="movie-grid">
+        <div class="movie" *ngFor="let movie of genreMovies.movies">
+          <app-movie-item [movieInfo]="movie"></app-movie-item>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -25,10 +25,9 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-
     private Integer movieId;
+
+
     private String title;
     private String releaseYear;
     @Column(length = 1000)
@@ -86,7 +85,7 @@ public class Movie {
 
 
 
-    public List<String> convertStringToList(String stringListJson) {
+    public static List<String> convertStringToList(String stringListJson) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(stringListJson, new TypeReference<List<String>>() {});

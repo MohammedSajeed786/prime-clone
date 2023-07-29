@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MovieMediaRepository extends JpaRepository<MovieMedia, Movie> {
+public interface MovieMediaRepository extends JpaRepository<MovieMedia,Integer> {
 
     @Query("select m from MovieMedia m where m.movie.movieId=:movieId")
     Optional<MovieMedia> findByMovieId(Integer movieId);

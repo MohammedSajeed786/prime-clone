@@ -32,7 +32,6 @@ public class MovieDetailsDto {
 
     public static Movie convertDtoToEntity(MovieDetailsDto dto) {
         return Movie.builder()
-                .movieId(dto.getMovieId())
                 .title(dto.getTitle())
                 .releaseYear(dto.getReleaseYear())
                 .description(dto.getDescription())
@@ -49,7 +48,7 @@ public class MovieDetailsDto {
                 .build();
     }
 
-    public String convertListToString(List<String> stringList) {
+    public static String convertListToString(List<String> stringList) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.writeValueAsString(stringList);

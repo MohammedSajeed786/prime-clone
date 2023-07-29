@@ -1,5 +1,6 @@
 package com.prime.movie.service;
 
+import com.prime.movie.dto.MovieByGenreDto;
 import com.prime.movie.dto.MovieDetailsDto;
 import com.prime.movie.dto.MovieSummaryDto;
 import org.springframework.core.io.Resource;
@@ -23,4 +24,10 @@ public interface MovieService {
     List<MovieSummaryDto> getAllMovies(Integer page, Integer pageSize, String sortBy, Sort.Direction direction);
 
     Long getTotalMovies();
+
+
+
+    List<MovieByGenreDto> groupMoviesByGenre();
+
+    List<String> getGenres();
 }
