@@ -21,11 +21,11 @@ public interface MovieService {
 
     Mono<Resource> getFullMovie(Integer movieId);
 
-    List<MovieSummaryDto> getAllMovies(Integer page, Integer pageSize, String sortBy, Sort.Direction direction);
-
-    Long getTotalMovies();
+    List<MovieSummaryDto> getAllMovies(Integer page, Integer pageSize, String sortBy, Sort.Direction direction, String genre);
 
 
+
+    Long getTotalMoviesByGenre(String genre);
 
     List<MovieByGenreDto> groupMoviesByGenre();
 

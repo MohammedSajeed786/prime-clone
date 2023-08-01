@@ -17,4 +17,7 @@ public interface MovieRepository extends JpaRepository<Movie,Integer> {
 
     @Query("select m from Movie m where m.genres like %:genre%")
     Page<Movie> findMoviesByGenre(String genre, Pageable pageable);
+
+    @Query("select count(m) from Movie m where m.genres like %:genre%")
+    Long countByGenre(String genre);
 }

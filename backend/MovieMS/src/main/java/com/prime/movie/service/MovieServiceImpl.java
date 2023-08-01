@@ -105,9 +105,9 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<MovieSummaryDto> getAllMovies(Integer page, Integer pageSize, String sortBy, Sort.Direction direction) {
+    public List<MovieSummaryDto> getAllMovies(Integer page, Integer pageSize, String sortBy, Sort.Direction direction, String genre) {
         //logic to check page is valid
-        Long totalResults = getTotalMovies();
+        Long totalResults = getTotalMoviesByGenre(genre);
         Long totalPages = totalResults / pageSize;
         if (totalResults % pageSize != 0) totalPages++;
         if (totalPages < page) throw new MovieException("invalid page number");
@@ -117,7 +117,7 @@ public class MovieServiceImpl implements MovieService {
 
             Pageable pageable = PageRequest.of(page, pageSize, Sort.by(direction, sortBy));
 
-            Page<Movie> pageData = movieRepository.findAll(pageable);
+            Page<Movie> pageData = movieRepository.findMoviesByGenre(genre,pageable);
             List<MovieSummaryDto> movieSummaryDtos = new ArrayList<>();
             if (pageData.hasContent()) {
                 List<Movie> movieList = pageData.getContent();
@@ -132,8 +132,8 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Long getTotalMovies() {
-        return movieRepository.count();
+    public Long getTotalMoviesByGenre(String genre) {
+        return movieRepository.countByGenre(genre);
     }
 
     @Override

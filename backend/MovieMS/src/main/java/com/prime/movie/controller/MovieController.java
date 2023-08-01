@@ -42,11 +42,11 @@ public class MovieController {
 
     }
 
-    @GetMapping("/allMovies")
-    public ResponseEntity<MovieListResponse> getAllMovies(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "20") Integer pageSize, @RequestParam(defaultValue = "movieId") String sortBy, @RequestParam(defaultValue = "ASC")Sort.Direction direction){
+    @GetMapping("/genre/{genre}/allMovies")
+    public ResponseEntity<MovieListResponse> getAllMovies(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "20") Integer pageSize, @RequestParam(defaultValue = "movieId") String sortBy, @RequestParam(defaultValue = "ASC")Sort.Direction direction, @PathVariable String genre){
 
-       List<MovieSummaryDto> movies= movieService.getAllMovies(page,pageSize,sortBy,direction);
-        MovieListResponse movieListResponse= MovieListResponse.builder().movies(movies).pageSize(movies.size()).currentPage(page).totalResults(movieService.getTotalMovies()).build();
+       List<MovieSummaryDto> movies= movieService.getAllMovies(page,pageSize,sortBy,direction,genre);
+        MovieListResponse movieListResponse= MovieListResponse.builder().movies(movies).pageSize(movies.size()).currentPage(page).totalResults(movieService.getTotalMoviesByGenre(genre)).build();
         return new ResponseEntity<>(movieListResponse,HttpStatus.OK);
 
     }
