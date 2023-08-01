@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/login/login.component';
 import { RegisterComponent } from './features/register/register.component';
-import { MovieCatalogComponent } from './features/movie-catalog/movie-catalog.component';
+import { MovieCatalogComponent } from './features/catalog/components/movie-catalog/movie-catalog.component';
 import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    pathMatch:"full",
+    pathMatch: 'full',
     canActivate: [authGuard],
     loadChildren: () =>
       import('../app/features/landing-page/landing-page.module').then(
@@ -32,13 +32,13 @@ const routes: Routes = [
       ),
     // component: RegisterComponent,
   },
-  
+
   {
     path: 'catalog',
     canActivate: [authGuard],
     loadChildren: () =>
-      import('../app/features/movie-catalog/movie-catalog.module').then(
-        (m) => m.MovieCatalogModule
+      import('./features/catalog/catalog.module').then(
+        (m) => m.CatalogModule
       ),
     // component: MovieCatalogComponent,
   },

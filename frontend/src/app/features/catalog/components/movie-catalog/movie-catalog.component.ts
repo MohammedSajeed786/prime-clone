@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieCatalogService } from './movie-catalog.service';
+import { CatalogService } from '../../catalog.service';
 import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/shared/interfaces/MovieListResponse';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
@@ -15,7 +15,7 @@ export class MovieCatalogComponent implements OnInit {
   moviesByGenreList!: {genre:string,movies:Movie[]}[];
 
   constructor(
-    private movieCatalogService: MovieCatalogService,
+    private movieCatalogService: CatalogService,
     private toastService: ToastService
   ) {}
 

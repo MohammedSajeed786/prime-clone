@@ -8,10 +8,7 @@ import { CoreModule } from './core/core.module';
 import { ToastModule } from './shared/components/toast/toast.module';
 import { JwtInterceptorService } from './core/services/jwt-interceptor/jwt-interceptor.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { DialogComponent } from './shared/components/dialog/dialog.component';
-import { DialogModule } from './shared/components/dialog/dialog.module';
-import { MovieItemComponent } from './features/movie-item/movie-item.component';
-import { DurationPipe } from './shared/pipes/duration/duration.pipe';
+import { MovieDetailComponent } from './features/movie-detail/movie-detail.component';
 
 @NgModule({
   declarations: [AppComponent],

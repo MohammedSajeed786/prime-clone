@@ -1,0 +1,34 @@
+<div class="genre-catalog">
+  <div class="back" (click)="backClick()">
+    <span class="material-symbols-outlined"> arrow_left_alt </span>
+    Back
+  </div>
+  <h2 class="genre">{{ genre | titlecase }}</h2>
+  <app-movie-grid [movies]="movieList"></app-movie-grid>
+  <div class="pagination">
+    <button
+      class="prev pagination-button"
+      [disabled]="currentPage == 1"
+      (click)="changePage(currentPage - 1)"
+    >
+      <span class="material-symbols-outlined"> arrow_left_alt </span>
+      Previous
+    </button>
+    <button
+      class="pagination-button"
+      [class]="currentPage == page ? 'active' : ''"
+      *ngFor="let page of range(totalPages)"
+      (click)="changePage(page)"
+    >
+      {{ page }}
+    </button>
+    <button
+      class="next pagination-button"
+      [disabled]="currentPage == totalPages"
+      (click)="changePage(currentPage + 1)"
+    >
+      Next
+      <span class="material-symbols-outlined"> arrow_right_alt </span>
+    </button>
+  </div>
+</div>

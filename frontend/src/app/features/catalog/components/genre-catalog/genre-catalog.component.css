@@ -1,0 +1,122 @@
+.genre-catalog {
+  box-sizing: border-box;
+  padding: var(--padding-content);
+  transition: all 0.3s ease-out;
+}
+.genre {
+  color: var(--dark-blue);
+  padding: 15px;
+  box-sizing: border-box;
+}
+h2 {
+  margin: 0px;
+}
+.pagination {
+  box-sizing: border-box;
+  margin: 30px 15px 0px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pagination-button {
+  box-sizing: border-box;
+  /* border: 1px solid var(--dark-blue); */
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  margin: 0px 3px;
+}
+
+.next,
+.prev {
+  /* color: var(--dark-blue); */
+  border: 3px solid var(--dark-blue);
+
+  width: 100px;
+  height: 50px;
+  border-radius: 35px;
+  box-sizing: border-box;
+}
+
+span {
+  font-size: 15px;
+  position: relative;
+  top: 3px;
+}
+
+.pagination-button.active {
+  background-color: var(--dark-blue) !important;
+  color: var(--white) !important;
+}
+
+button:disabled {
+  cursor: no-drop;
+  opacity: 0.5;
+}
+
+.back {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding-left: 15px;
+  font-weight: bold;
+}
+.back span {
+  margin-right: 10px;
+}
+
+.pagination-button,
+.back {
+  background-color: var(--dark-black) !important;
+  color: var(--white) !important;
+}
+.pagination-button span,
+.back span {
+  color: var(--dark-blue) !important;
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .genre-catalog {
+    padding: var(--padding-content-ipad);
+  }
+  
+}
+@media screen and (min-width: 890px) and (max-width: 1024px) {
+  
+  .genre,.back{
+    padding-left: 30px;
+  }
+  
+}
+@media screen and (min-width: 550px) and (max-width: 710px) {
+  
+  .genre,.back{
+    padding-left: 30px;
+  }
+  
+}
+
+@media screen and (max-width: 767px) {
+  .genre-catalog {
+    padding: var(--padding-content-mobile);
+  }
+ 
+
+}
+@media screen and (max-width: 420px) {
+  .prev,
+  .next {
+    display: none;
+  }
+  .pagination {
+    justify-content: flex-start;
+  }
+}
+

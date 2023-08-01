@@ -5,17 +5,13 @@
       *ngFor="let genreMovies of moviesByGenreList"
     >
       <div class="details">
-        <p class="genre">{{ genreMovies.genre }}</p>
-        <div class="see-more">
+        <h2 class="genre">{{ genreMovies.genre }}</h2>
+        <a class="see-more" [routerLink]="'/catalog/' + genreMovies.genre|lowercase">
           <p>See more</p>
           <span class="material-symbols-outlined icon"> chevron_right </span>
-        </div>
+        </a>
       </div>
-      <div class="movie-grid">
-        <div class="movie" *ngFor="let movie of genreMovies.movies">
-          <app-movie-item [movieInfo]="movie"></app-movie-item>
-        </div>
-      </div>
+      <app-movie-grid [movies]="genreMovies.movies"></app-movie-grid>
     </div>
   </div>
 </div>
