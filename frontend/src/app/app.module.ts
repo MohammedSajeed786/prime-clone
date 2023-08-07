@@ -9,6 +9,8 @@ import { ToastModule } from './shared/components/toast/toast.module';
 import { JwtInterceptorService } from './core/services/jwt-interceptor/jwt-interceptor.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MovieDetailComponent } from './features/movie-detail/movie-detail.component';
+import { StoreModule } from '@ngrx/store';
+import { cartReducer } from './store/reducer/cart.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,8 +21,10 @@ import { MovieDetailComponent } from './features/movie-detail/movie-detail.compo
     HttpClientModule,
     CoreModule,
     ToastModule,
-    NgxSpinnerModule
-   
+    NgxSpinnerModule,
+    StoreModule.forRoot({
+      cart: cartReducer,
+    }),
   ],
   providers: [
     {

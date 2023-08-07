@@ -12,7 +12,7 @@ import { ToastService } from 'src/app/shared/components/toast/toast.service';
 export class MovieCatalogComponent implements OnInit {
   movieResponseSubscription!: Subscription;
 
-  moviesByGenreList!: {genre:string,movies:Movie[]}[];
+  moviesByGenreList!: { genre: string; movies: Movie[] }[];
 
   constructor(
     private movieCatalogService: CatalogService,
@@ -25,8 +25,6 @@ export class MovieCatalogComponent implements OnInit {
       .subscribe({
         next: (value) => {
           this.moviesByGenreList = value.data;
-          
-         
         },
         error: (err) => {
           this.toastService.setToastData('error', err.error.message);

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MovieListResponse } from 'src/app/shared/interfaces/MovieListResponse';
-import { MovieResponse } from 'src/app/shared/interfaces/MovieResponse';
+import { Response } from 'src/app/shared/interfaces/Response';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class CatalogService {
     return this.http.get<MovieListResponse>(this.url + 'allMovies');
   }
 
-  getAllMoviesGroupedByGenres(): Observable<MovieResponse> {
-    return this.http.get<MovieResponse>(this.url + 'genres/movies');
+  getAllMoviesGroupedByGenres(): Observable<Response> {
+    return this.http.get<Response>(this.url + 'genres/movies');
   }
 
   getAllMoviesByGenre(

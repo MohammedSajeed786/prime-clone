@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import '~ngx-sharebuttons/themes/default'; */
 :root {
   --dark-blue: #1a98ffff;
   --light-blue: #0f79afff;
@@ -16,7 +17,7 @@
   --honolulu-blue: #0f79afff;
   --padding-content: 65px;
   --padding-content-mobile: 15px;
-  --padding-content-ipad: 18px;
+  --padding-content-ipad: 18px; /*767 and below*/
 }
 
 body {

@@ -13,5 +13,8 @@ export interface MovieListResponse {
     thumbnail: string
     duration: number
     language: string
-  }
+    price:number
+}
+
+
   

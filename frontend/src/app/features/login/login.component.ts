@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
   login() {
-    this.spinner.show();
+  this.spinner.show();
    this.loginSubscription= this.authService.login(this.loginForm.value).subscribe({
       next: (res: AuthResponse) => {
         this.spinner.hide();

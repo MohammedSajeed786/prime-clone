@@ -8,5 +8,4 @@ import { Movie } from 'src/app/shared/interfaces/MovieListResponse';
 })
 export class MovieItemComponent {
    @Input() movieInfo!:Movie;
-   
 }

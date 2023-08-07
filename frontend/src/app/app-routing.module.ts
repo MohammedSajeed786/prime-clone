@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/login/login.component';
 import { RegisterComponent } from './features/register/register.component';
 import { MovieCatalogComponent } from './features/catalog/components/movie-catalog/movie-catalog.component';
-import { authGuard } from './core/guards/auth.guard';
+import { authGuard } from './core/guards/auth/auth.guard';
+import { cartGuard } from './core/guards/cart.guard';
 
 const routes: Routes = [
   {
@@ -11,7 +12,6 @@ const routes: Routes = [
     canActivate: [authGuard],
     loadChildren: () =>
       import('../app/features/login/login.module').then((m) => m.LoginModule),
-    // component: LoginComponent,
   },
   {
     path: 'register',
@@ -20,7 +20,6 @@ const routes: Routes = [
       import('../app/features/register/register.module').then(
         (m) => m.RegisterModule
       ),
-    // component: RegisterComponent,
   },
   {
     path: '',
@@ -30,17 +29,28 @@ const routes: Routes = [
       import('../app/features/landing-page/landing-page.module').then(
         (m) => m.LandingPageModule
       ),
-    // component: RegisterComponent,
   },
 
   {
     path: 'catalog',
-    canActivate: [authGuard],
+    canActivate: [authGuard, cartGuard],
     loadChildren: () =>
-      import('./features/catalog/catalog.module').then(
-        (m) => m.CatalogModule
+      import('./features/catalog/catalog.module').then((m) => m.CatalogModule),
+  },
+  {
+    path: 'details',
+    canActivate: [authGuard, cartGuard],
+
+    loadChildren: () =>
+      import('./features/movie-detail/movie-detail.module').then(
+        (m) => m.MovieDetailModule
       ),
-    // component: MovieCatalogComponent,
+  },
+  {
+    path: 'cart',
+    canActivate: [authGuard, cartGuard],
+    loadChildren: () =>
+      import('./features/cart/cart.module').then((m) => m.CartModule),
   },
   {
     path: '**',

@@ -1,0 +1,28 @@
+<div class="cart-item-container">
+  <div class="thumbnail">
+    <img [src]="cartItem.movie.thumbnail" alt="" />
+  </div>
+  <div class="details">
+    <p class="title">{{ cartItem.movie.title }}</p>
+    <span class="other-details">
+      <p class="release">{{ cartItem.movie.releaseYear }}</p>
+      <p class="price">$ {{ cartItem.movie.price }}</p>
+    </span>
+  </div>
+  <div class="remove">
+    <button (click)="removeClicked = true">
+      Remove
+      <!-- <span class="material-symbols-outlined"> do_not_disturb_on </span> -->
+    </button>
+  </div>
+</div>
+<app-dialog
+  *ngIf="removeClicked"
+  [dialogText]="{
+    message: 'are you sure you want to remove this movie from cart?',
+    okText: 'yes',
+    cancelText: 'no'
+  }"
+  (cancelEvent)="removeClicked = false"
+  (okEvent)="removeFromCart()"
+></app-dialog>

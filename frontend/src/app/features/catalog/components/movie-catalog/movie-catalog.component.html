@@ -6,7 +6,7 @@
     >
       <div class="details">
         <h2 class="genre">{{ genreMovies.genre }}</h2>
-        <a class="see-more" [routerLink]="'/catalog/' + genreMovies.genre|lowercase">
+        <a class="see-more" [routerLink]="'/catalog/' + genreMovies.genre.replaceAll(' ','-')|lowercase">
           <p>See more</p>
           <span class="material-symbols-outlined icon"> chevron_right </span>
         </a>

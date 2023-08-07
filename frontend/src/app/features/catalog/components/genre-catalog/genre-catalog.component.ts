@@ -1,14 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  Movie,
-  MovieListResponse,
-} from 'src/app/shared/interfaces/MovieListResponse';
+import {Movie} from 'src/app/shared/interfaces/MovieListResponse';
 import { CatalogService } from '../../catalog.service';
-import {
-  Toast,
-  ToastService,
-} from 'src/app/shared/components/toast/toast.service';
+import { ToastService} from 'src/app/shared/components/toast/toast.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -17,12 +11,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './genre-catalog.component.html',
   styleUrls: ['./genre-catalog.component.css'],
 })
-export class GenreCatalogComponent implements OnInit,OnDestroy {
+export class GenreCatalogComponent implements OnInit, OnDestroy {
   genre!: string | null;
   movieList!: Movie[];
   currentPage: number = 1;
   totalPages!: number;
-  subscriptions: Subscription[]=[];
+  subscriptions: Subscription[] = [];
   constructor(
     private route: ActivatedRoute,
     private catalogService: CatalogService,
@@ -33,6 +27,7 @@ export class GenreCatalogComponent implements OnInit,OnDestroy {
   ngOnInit() {
     let routingSubscription = this.route.paramMap.subscribe((param) => {
       this.genre = param.get('genre');
+      if (this.genre) this.genre = this.genre.replaceAll('-', ' ');
       this.getGenreMovies(this.currentPage);
     });
 
@@ -71,13 +66,11 @@ export class GenreCatalogComponent implements OnInit,OnDestroy {
   calculatePages(currentPage: number, pageSize: number, totalResults: number) {
     this.currentPage = currentPage;
     this.totalPages = Math.ceil(totalResults / pageSize);
-   
   }
 
   changePage(page: number) {
     this.getGenreMovies(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-   
   }
   backClick() {
     this.location.back();
