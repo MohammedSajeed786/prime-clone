@@ -18,11 +18,12 @@ public class MovieSummaryDto {
     private String thumbnail;
     private int duration;
     private String language;
+    private Double price;
 
 
     public static Movie convertDtoToEntity(MovieSummaryDto dto) {
         return Movie.builder().movieId(dto.getMovieId()).title(dto.getTitle()).releaseYear(dto.getReleaseYear()).description(dto.getDescription()).thumbnail(dto.getThumbnail())
-                .duration(dto.getDuration()).language(dto.getLanguage())
+                .duration(dto.getDuration()).language(dto.getLanguage()).price(dto.getPrice())
                 .build();
 
     }

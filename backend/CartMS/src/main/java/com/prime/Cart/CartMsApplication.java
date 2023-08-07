@@ -1,17 +1,15 @@
-package com.prime.movie;
+package com.prime.Cart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class MovieMsApplication {
-
+public class CartMsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MovieMsApplication.class, args);
+		SpringApplication.run(CartMsApplication.class, args);
 	}
 
 	@Bean

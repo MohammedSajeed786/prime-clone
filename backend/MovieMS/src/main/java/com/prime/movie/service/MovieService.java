@@ -17,9 +17,9 @@ public interface MovieService {
     MovieDetailsDto getMovieDetails(Integer movieId);
 
 
-    Mono<Resource> getTrailer(Integer movieId);
+    Mono<Resource> getTrailer(Integer movieId, String token);
 
-    Mono<Resource> getFullMovie(Integer movieId);
+    Mono<Resource> getFullMovie(Integer movieId, String token);
 
     List<MovieSummaryDto> getAllMovies(Integer page, Integer pageSize, String sortBy, Sort.Direction direction, String genre);
 
@@ -30,4 +30,11 @@ public interface MovieService {
     List<MovieByGenreDto> groupMoviesByGenre();
 
     List<String> getGenres();
+
+    String generateTrailerToken(String userId);
+
+
+    String generateMovieToken(String userId);
+
+    Boolean isTokenValid(String token);
 }

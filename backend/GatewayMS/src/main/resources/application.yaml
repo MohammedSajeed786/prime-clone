@@ -23,6 +23,12 @@ spring:
             - Path=/movie/**
           filters:
             - JwtAuthenticationFilter
+        - id: CartMS
+          uri: http://localhost:8003
+          predicates:
+            - Path=/cart/**
+          filters:
+            - JwtAuthenticationFilter
 
 
 

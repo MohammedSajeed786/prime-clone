@@ -76,7 +76,7 @@ public class Movie {
                 .description(entity.getDescription())
                 .thumbnail(entity.getThumbnail())
                 .duration(entity.getDuration())
-                .language(entity.getLanguage())
+                .language(entity.getLanguage()).price(entity.getPrice())
                 .build();
     }
 
