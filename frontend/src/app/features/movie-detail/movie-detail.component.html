@@ -26,8 +26,8 @@
     </div>
 
     <div class="options">
-      <div class="buy">
-        <button>{{ "buy now" | uppercase }}</button>
+      <div class="buy" *ngIf="isPresentInVault">
+        <button (click)="showMovie=true">{{ "Play" | uppercase }}</button>
       </div>
 
       <div class="trailer circle" title="trailer" (click)="showTrailer = true">
@@ -58,8 +58,8 @@
         </button>
       </div>
 
-      <div class="cart circle" title="add to cart">
-        <button (click)="isPresentIncart?removeFromCart():addToCart()">
+      <div class="cart circle" title="add to cart" *ngIf="!isPresentInVault">
+        <button (click)="isPresentIncart ? removeFromCart() : addToCart()">
           <svg
             class="fbl-icon _30dE3d"
             viewBox="0 0 24 24"
@@ -164,8 +164,23 @@
       controls
       autoplay
       controlsList="nodownload"
-      #videoPlayer
-      (error)="handleVideoError($event)"
+      #trailerPlayer
+      (error)="handleVideoError($event,'trailer')"
+    ></video>
+  </div>
+</div>
+<div class="movie-overlay" *ngIf="movieDetail && showMovie">
+  <div class="movie-container">
+    <span class="material-symbols-outlined" (click)="showMovie = false">
+      close
+    </span>
+    <video
+      [src]="movieUrl + '?token=' + movieToken"
+      controls
+      autoplay
+      controlsList="nodownload"
+      #moviePlayer
+      (error)="handleVideoError($event,'movie')"
     ></video>
   </div>
 </div>

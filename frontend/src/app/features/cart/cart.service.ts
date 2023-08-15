@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { CartItem } from 'src/app/shared/interfaces/CartItem';
 import {
   addToCart,
+  clearCart,
   createCart,
   removeFromCart,
 } from 'src/app/store/action/cart.action';
@@ -34,10 +35,10 @@ export class CartService {
         .get<Response>(this.cartUrl + 'all')
         .pipe(
           tap((res) => {
-            this.isCartLoaded = true;
             // console.log('inside get cart');
             // console.log(res);
             this.store.dispatch(createCart({ userCart: res.data.cart }));
+            this.isCartLoaded = true;
           })
         )
         .subscribe();
@@ -61,15 +62,17 @@ export class CartService {
       .delete<Response>(this.cartUrl + 'remove/' + cartItemId)
       .pipe(
         tap((res) => {
-          console.log("inside tap")
+          // console.log("inside tap")
           this.store.dispatch(removeFromCart({ cartItemId: cartItemId }));
         })
       );
   }
 
   isPresentInCart(movieId: number) {
+    // console.log(this.cart$)
     return this.cart$.pipe(
       map((cart) => {
+        // console.log("hello")
         const cartItem = cart.find((cartItem: CartItem) => {
           // console.log(cartItem);
           return cartItem.movie.movieId == movieId;
@@ -78,5 +81,9 @@ export class CartService {
         return cartItem ? cartItem.cartItemId : null;
       })
     );
+  }
+
+  clearCart() {
+    this.store.dispatch(clearCart());
   }
 }

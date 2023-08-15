@@ -15,7 +15,7 @@
   --white: #ffffffff;
   --cadet-gray: #9f9f9fff;
   --honolulu-blue: #0f79afff;
-  --padding-content: 65px;
+  --padding-content: 20px 65px ;
   --padding-content-mobile: 15px;
   --padding-content-ipad: 18px; /*767 and below*/
 }

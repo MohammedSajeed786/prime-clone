@@ -11,6 +11,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MovieDetailComponent } from './features/movie-detail/movie-detail.component';
 import { StoreModule } from '@ngrx/store';
 import { cartReducer } from './store/reducer/cart.reducer';
+import { vaultReducer } from './store/reducer/vault.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { cartReducer } from './store/reducer/cart.reducer';
     NgxSpinnerModule,
     StoreModule.forRoot({
       cart: cartReducer,
+      vault:vaultReducer
     }),
   ],
   providers: [

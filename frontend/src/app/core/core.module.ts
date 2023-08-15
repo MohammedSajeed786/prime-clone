@@ -6,6 +6,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DialogModule } from '../shared/components/dialog/dialog.module';
+import { LucideAngularModule,Home,ShoppingBag,Library } from 'lucide-angular';
 
 
 
@@ -18,7 +19,8 @@ import { DialogModule } from '../shared/components/dialog/dialog.module';
   imports: [
     CommonModule,
     RouterModule,
-    DialogModule
+    DialogModule,
+    LucideAngularModule.pick({Home,ShoppingBag,Library})
   ],
   exports:[HeaderComponent,HeaderDirective,FooterComponent]
 })

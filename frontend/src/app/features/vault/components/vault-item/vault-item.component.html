@@ -1,0 +1,27 @@
+<a
+  [routerLink]="[
+    '/details/' +
+      vaultItem.movie.title.replaceAll(' ', '-').replaceAll('/', '-')
+  ]"  [queryParams]="{ movieId: vaultItem.movie.movieId }"
+>
+  <div class="vault-item-container">
+    <div class="flip-card">
+      <div class="card-front">
+        <img [src]="vaultItem.movie.thumbnail" alt="" />
+      </div>
+      <div class="card-back">
+        <div class="title">{{ vaultItem.movie.title }}</div>
+        <div class="other-details">
+          <span class="release">{{ vaultItem.movie.releaseYear }}</span>
+          <span class="duration">{{
+            vaultItem.movie.duration | duration
+          }}</span>
+          <span class="age">U/A 13+</span>
+        </div>
+        <div class="description">
+          {{ vaultItem.movie.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+</a>

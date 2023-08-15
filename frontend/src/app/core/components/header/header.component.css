@@ -2,8 +2,9 @@
   background-color: var(--dark-black);
   display: flex;
   flex-direction: row;
-  padding: 10px 20px;
-  width: 1000px;
+  padding: 0px 20px;
+  max-width: 1000px;
+  flex-wrap: wrap;
   margin: auto;
   height: 50px;
   box-sizing: border-box;
@@ -14,21 +15,23 @@
 }
 .header-list {
   list-style: none;
-  margin: 0px;
+  margin: 0 30px;
   padding: 0px;
+  height: 100%;
   /* width: 800px; */
   box-sizing: border-box;
-  padding: 30px;
+  /* padding: 10px; */
 }
 .header-list li {
   display: inline-block;
   margin: 0px 10px;
   cursor: pointer;
-  padding: 10px;
+  /* padding: 10px; */
   box-sizing: border-box;
+  width:60px;
 }
-.header-list li:hover{
-    background-color: var(--navy-blue);
+.header-list li:hover {
+  background-color: var(--navy-blue);
 }
 .logo {
   font-size: large;
@@ -39,11 +42,11 @@
   margin-left: auto;
   margin-top: 5px;
   position: relative;
-  padding:10px ;
+  padding: 10px;
   box-sizing: border-box;
 }
-.profile:hover{
-    background-color: var(--navy-blue);
+.profile:hover {
+  background-color: var(--navy-blue);
 }
 .profile svg {
   cursor: pointer;
@@ -83,12 +86,52 @@
   background-color: var(--white);
   color: var(--dark-black);
 }
-a{
-    text-decoration: none;
-    color: var(--white)
+a {
+  text-decoration: none;
+
+  color: var(--white);
 }
-@media screen and (max-width: 1023px) {
+
+.list-item div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(12px);
+  height: 100%;
+  transition: all 0.3s ease;
+}
+.list-item span{
+  opacity: 0;
+}
+.list-item:hover span{
+    opacity: 1;
+   
+}
+.list-item:hover lucide-icon{
+  opacity: 0;
+}
+.list-item:hover div{
+  transform: translateY(-12px);
+}
+.header ul{
+  box-sizing: border-box;
+}
+@media screen and (max-width: 480px) {
   .header {
+    /* display: none; */
+    justify-content: flex-start;
+  }
+  .logo{
     display: none;
   }
+  .header-list{
+    margin:0px;
+  }
+  .profile{
+   padding: 10px 8px;
+  }
+}
+.active lucide-icon{
+ border-bottom: 2px solid var(--white);
 }

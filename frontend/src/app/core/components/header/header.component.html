@@ -5,9 +5,29 @@
     </span></a
   >
   <ul *ngIf="isLoggedIn" class="header-list">
-    <a [routerLink]="['/catalog']"><li>Home</li></a>
-    <a [routerLink]="['/cart']"><li>Cart</li></a>
-    <a [routerLink]="['/vault']"><li>Vault</li></a>
+    <li class="list-item">
+      <a [routerLink]="['/catalog']" [routerLinkActive]="['active']">
+        <div>
+          <lucide-icon name="home"></lucide-icon>
+          <span> Home </span>
+        </div>
+      </a>
+    </li>
+    <li class="list-item">
+      <a [routerLink]="['/cart']" [routerLinkActive]="['active']">
+        <div>
+          <lucide-icon name="shopping-bag"></lucide-icon>
+          <span> Cart </span>
+        </div>
+      </a>
+    </li>
+    <li class="list-item">
+      <a [routerLink]="['/vault']" [routerLinkActive]="['active']">
+        <div>
+          <lucide-icon name="library"></lucide-icon> <span> Vault </span>
+        </div>
+      </a>
+    </li>
   </ul>
   <span class="profile" *ngIf="isLoggedIn">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="user">
@@ -44,10 +64,15 @@
     <div class="profile-dropdown">
       <ul>
         <li>Profile</li>
-        <li (click)="logoutClicked()" >Logout</li>
+        <li (click)="logoutClicked()">Logout</li>
       </ul>
     </div>
   </span>
 </div>
 
-<app-dialog [dialogText]="dialogText" (okEvent)="logout()" (cancelEvent)="showDialog=false" *ngIf="showDialog"></app-dialog>
+<app-dialog
+  [dialogText]="dialogText"
+  (okEvent)="logout()"
+  (cancelEvent)="showDialog = false"
+  *ngIf="showDialog"
+></app-dialog>

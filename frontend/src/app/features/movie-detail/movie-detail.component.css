@@ -91,7 +91,7 @@ p {
   height: 60px; */
   transform: scale(1.25);
 }
-.trailer-overlay {
+.trailer-overlay,.movie-overlay {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -113,7 +113,7 @@ p {
   align-items: center;
   justify-content: center;
 }
-.trailer-container {
+.trailer-container,.movie-container {
   height: 100%;
   width: 100%;
   position: relative;
@@ -146,7 +146,7 @@ video {
   width: 100%;
   object-fit: cover;
 }
-.trailer-container span {
+.trailer-container span, .movie-container span {
   display: block;
   position: absolute;
   top: 35px;

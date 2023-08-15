@@ -4,7 +4,8 @@ import { LoginComponent } from './features/login/login.component';
 import { RegisterComponent } from './features/register/register.component';
 import { MovieCatalogComponent } from './features/catalog/components/movie-catalog/movie-catalog.component';
 import { authGuard } from './core/guards/auth/auth.guard';
-import { cartGuard } from './core/guards/cart.guard';
+import { cartGuard } from './core/guards/cart/cart.guard';
+import { vaultGuard } from './core/guards/vault/vault.guard';
 
 const routes: Routes = [
   {
@@ -33,13 +34,13 @@ const routes: Routes = [
 
   {
     path: 'catalog',
-    canActivate: [authGuard, cartGuard],
+    canActivate: [authGuard, cartGuard,vaultGuard],
     loadChildren: () =>
       import('./features/catalog/catalog.module').then((m) => m.CatalogModule),
   },
   {
     path: 'details',
-    canActivate: [authGuard, cartGuard],
+    canActivate: [authGuard, cartGuard,vaultGuard],
 
     loadChildren: () =>
       import('./features/movie-detail/movie-detail.module').then(
@@ -48,9 +49,14 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    canActivate: [authGuard, cartGuard],
+    canActivate: [authGuard, cartGuard,vaultGuard],
     loadChildren: () =>
       import('./features/cart/cart.module').then((m) => m.CartModule),
+  },
+  {
+    path:'vault',
+    canActivate:[authGuard,cartGuard,vaultGuard],
+    loadChildren:()=>import("./features/vault/vault.module").then((m)=>m.VaultModule)
   },
   {
     path: '**',

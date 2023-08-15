@@ -1,0 +1,10 @@
+<div class="vault-container">
+  <h1 class="title">My Vault</h1>
+  <div class="content">
+    <app-vault-item
+      [class]="i%2==1?'expand-col':''"
+      [vaultItem]="vaultItem"
+      *ngFor="let vaultItem of vault$ | async;index as i"
+    ></app-vault-item>
+  </div>
+</div>

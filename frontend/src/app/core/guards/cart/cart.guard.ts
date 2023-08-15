@@ -1,5 +1,5 @@
 import { CanActivateFn } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { inject } from '@angular/core';
 import { CartService } from 'src/app/features/cart/cart.service';
 import { map, skipWhile, switchMap, take, tap } from 'rxjs/operators';
