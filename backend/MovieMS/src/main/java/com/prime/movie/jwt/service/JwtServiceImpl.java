@@ -39,6 +39,8 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public Boolean isTokenValid(String token) {
+
+
         if(!isTokenExpired(token) && isUserValid(extractUser(token))) return true;
         else throw new TokenException("invalid token");
     }
@@ -46,14 +48,22 @@ public class JwtServiceImpl implements JwtService {
     @Override
     public Boolean isTokenExpired(String token) {
         if(extractExpiration(token).before(new Date())) {
-            throw new TokenException("token expired");}
+            throw new TokenException("token expired");
+        }
         return false;
     }
 
     @Override
     public Boolean isUserValid(String userId) {
-        if(userDetailsService.getUserByUserId(userId)!=null) return true;
-        else throw new TokenException("invalid user");
+
+        if(userDetailsService.getUserByUserId(userId)!=null){
+
+            return true;
+        }
+        else {
+
+            throw new TokenException("invalid user");
+        }
     }
 
     private Key getSignInKey() {

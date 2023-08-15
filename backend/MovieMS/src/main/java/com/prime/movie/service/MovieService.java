@@ -34,6 +34,7 @@ public interface MovieService {
     String generateTrailerToken(String userId);
 
 
+
     String generateMovieToken(String userId);
 
     Boolean isTokenValid(String token);

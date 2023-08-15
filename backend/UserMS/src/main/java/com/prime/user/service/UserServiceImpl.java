@@ -8,10 +8,13 @@ import com.prime.user.exception.UserException;
 import com.prime.user.jwt.service.JwtService;
 import com.prime.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -25,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @Override
     public String loginUser(LoginDto loginDto) throws UserException {
@@ -70,5 +76,55 @@ public class UserServiceImpl implements UserService {
         else{
             throw new UserException("user not found");
         }
+    }
+
+
+    @Override
+    public String sendOtp(String email){
+        Optional<User> optionalUser=userRepository.findByEmail(email);
+        if(optionalUser.isPresent()){
+            User user=optionalUser.get();
+            Random random=new Random();
+            Integer otp= random.nextInt(1000)+999;
+            user.setOtp(otp);
+            userRepository.save(user);
+            sendMessage(email,"Movie Verse: Reset Password","OTP to change your password is "+otp+". Please do not share your otp with anyone.\nThanks,\nMovie Verse Team.");
+            return "otp has been sent to your email";
+        }
+            else throw new UserException("invalid email");
+
+    }
+
+    @Override
+    public void sendMessage(String to, String subject, String body){
+        SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
+        simpleMailMessage.setFrom("mdsajeedmds@gmail.com");
+        simpleMailMessage.setTo(to);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(body);
+        javaMailSender.send(simpleMailMessage);
+    }
+
+    @Override
+    public String verifyOtp(String email,Integer otp){
+       Optional<User> optionalUser= userRepository.findByEmail(email);
+       if(optionalUser.isPresent()){
+           User user=optionalUser.get();
+           if(user.getOtp().equals(otp)) return "otp verified successfully";
+           else return "invalid otp";
+       }
+       else throw new UserException("invalid email");
+    }
+    @Override
+    public String updatePassword(String email,String newPassword){
+        Optional<User> optionalUser= userRepository.findByEmail(email);
+        if(optionalUser.isPresent()){
+            User user=optionalUser.get();
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+            return "password updated successfully";
+        }
+        else throw new UserException("invalid email");
+
     }
 }

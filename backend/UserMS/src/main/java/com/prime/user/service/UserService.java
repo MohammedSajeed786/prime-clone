@@ -11,4 +11,13 @@ public interface UserService {
     String registerUser(RegisterDto userDto);
 
     UserDto getUser(String userId);
+
+
+    String sendOtp(String email);
+
+    void sendMessage(String to, String subject, String body);
+
+    String verifyOtp(String email, Integer otp);
+
+    String updatePassword(String email, String newPassword);
 }

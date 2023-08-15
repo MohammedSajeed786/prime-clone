@@ -2,7 +2,12 @@ server:
   port: 8000
 
 spring:
+  application:
+    name: GatewayMS
   cloud:
+    consul:
+      discovery:
+        hostname: localhost
     gateway:
       globalCors:
         cors-configurations:
@@ -13,22 +18,34 @@ spring:
             allowCredentials: true
       routes:
         - id: CustomerMS
-          uri: http://localhost:8001
+          uri: lb://UserMS
           predicates:
             - Path=/auth/**
-
         - id: MovieMS
-          uri: http://localhost:8002
+          uri: lb://MovieMS
           predicates:
             - Path=/movie/**
           filters:
             - JwtAuthenticationFilter
         - id: CartMS
-          uri: http://localhost:8003
+          uri: lb://CartMS
           predicates:
             - Path=/cart/**
           filters:
             - JwtAuthenticationFilter
+        - id: OrderMS
+          uri: lb://OrderMS
+          predicates:
+            - Path=/order/**
+          filters:
+            - JwtAuthenticationFilter
+        - id: VaultMS
+          uri: lb://VaultMS
+          predicates:
+            - Path=/vault/**
+          filters:
+            - JwtAuthenticationFilter
+
 
 
 

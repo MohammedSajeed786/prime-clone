@@ -1,6 +1,5 @@
 package com.prime.Cart.dto;
 
-import com.prime.Cart.entity.CartItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

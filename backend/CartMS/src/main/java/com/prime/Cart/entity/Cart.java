@@ -1,19 +1,17 @@
 package com.prime.Cart.entity;
 
-import com.prime.Cart.dto.CartDto;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//@Data
+@Data
 @Builder
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
 public class Cart {
 
     @Id
@@ -23,11 +21,12 @@ public class Cart {
     @Column(unique = true)
     String userId;
 
-    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "cartId", name = "cartId")
     List<CartItem> cartItemList;
 
-    public Cart(){
-        cartItemList=new ArrayList<>();
+    public Cart() {
+        cartItemList = new ArrayList<>();
     }
 
 //    public static CartDto convertEntityToDto(Cart entity){

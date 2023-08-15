@@ -26,8 +26,8 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
     private final List<ExceptionRule> exceptionsRules = List.of(
 
             new ExceptionRule(MovieException.class, HttpStatus.BAD_REQUEST),
-            new ExceptionRule(TokenException.class, HttpStatus.BAD_REQUEST),
-            new ExceptionRule(RuntimeException.class, HttpStatus.UNAUTHORIZED)
+            new ExceptionRule(TokenException.class, HttpStatus.UNAUTHORIZED),
+            new ExceptionRule(RuntimeException.class, HttpStatus.INTERNAL_SERVER_ERROR)
     );
 
 

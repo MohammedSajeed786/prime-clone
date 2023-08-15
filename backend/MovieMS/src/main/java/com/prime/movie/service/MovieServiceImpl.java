@@ -10,14 +10,20 @@ import com.prime.movie.jwt.exception.TokenException;
 import com.prime.movie.jwt.service.JwtService;
 import com.prime.movie.repository.MovieMediaRepository;
 import com.prime.movie.repository.MovieRepository;
+import com.prime.movie.utility.MovieResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
@@ -35,6 +41,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @Override
     public void addMovies(List<MovieDetailsDto> movieDetailsDtoList) {
@@ -76,7 +85,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Mono<Resource> getTrailer(Integer movieId, String token) {
-        if(jwtService.isTokenValid(token)) {
+        if (jwtService.isTokenValid(token)) {
             Optional<MovieMedia> movieMedia = movieMediaRepository.findByMovieId(movieId);
             if (movieMedia.isPresent()) {
                 String path = movieMedia.get().getTrailerPath();
@@ -84,15 +93,13 @@ public class MovieServiceImpl implements MovieService {
             } else {
                 throw new MovieException("movie not found");
             }
-        }
-        else throw new TokenException("invalid token");
+        } else throw new TokenException("invalid token");
     }
 
     @Override
     public Mono<Resource> getFullMovie(Integer movieId, String token) {
 
-        if(jwtService.isTokenValid(token)) {
-
+        if (jwtService.isTokenValid(token)) {
             Optional<MovieMedia> movieMedia = movieMediaRepository.findByMovieId(movieId);
             if (movieMedia.isPresent()) {
                 String path = movieMedia.get().getMoviePath();
@@ -100,10 +107,12 @@ public class MovieServiceImpl implements MovieService {
             } else {
                 throw new MovieException("movie not found");
             }
-        }
-        else throw new TokenException("invalid token");
+
+        } else throw new TokenException("invalid token");
 
     }
+
+
 
     @Override
     public List<MovieSummaryDto> getAllMovies(Integer page, Integer pageSize, String sortBy, Sort.Direction direction, String genre) {
@@ -181,19 +190,19 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public String generateTrailerToken(String userId) {
-        Long expiry= (long) (10*60*1000); // 10 min
-        return jwtService.generateToken(userId,expiry);
+        Long expiry = (long) (10 * 60 * 1000); // 10 min
+        return jwtService.generateToken(userId, expiry);
     }
 
     @Override
     public String generateMovieToken(String userId) {
-        Long expiry= (long) (5*60*60*1000); // 5 hrs
-        return jwtService.generateToken(userId,expiry);
+            Long expiry = (long) (5 * 60 * 60 * 1000); // 5 hrs
+            return jwtService.generateToken(userId, expiry);
     }
 
 
     @Override
-    public Boolean isTokenValid(String token){
+    public Boolean isTokenValid(String token) {
         return jwtService.isTokenValid(token);
     }
 }

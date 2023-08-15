@@ -1,5 +1,6 @@
 package com.prime.user.controller;
 
+import com.prime.user.dto.ForgotPasswordDto;
 import com.prime.user.dto.LoginDto;
 import com.prime.user.dto.RegisterDto;
 import com.prime.user.dto.UserDto;
@@ -40,4 +41,16 @@ public class AuthController {
 
     }
 
+    @PostMapping("/sendOtp")
+    public ResponseEntity<String> sendOtp(@RequestBody ForgotPasswordDto forgotPasswordDto){
+        return new ResponseEntity<>(userService.sendOtp(forgotPasswordDto.getEmail()),HttpStatus.CREATED);
+    }
+    @PostMapping("/verifyOtp")
+    public ResponseEntity<String> verifyOtp(@RequestBody ForgotPasswordDto forgotPasswordDto){
+        return new ResponseEntity<>(userService.verifyOtp(forgotPasswordDto.getEmail(),forgotPasswordDto.getOtp()),HttpStatus.CREATED);
+    }
+    @PostMapping("/updatePassword")
+    public ResponseEntity<String> updatePassword(@RequestBody ForgotPasswordDto forgotPasswordDto){
+        return new ResponseEntity<>(userService.updatePassword(forgotPasswordDto.getEmail(),forgotPasswordDto.getNewPassword()),HttpStatus.CREATED);
+    }
 }

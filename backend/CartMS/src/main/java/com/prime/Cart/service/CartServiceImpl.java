@@ -5,12 +5,14 @@ import com.prime.Cart.dto.CartItemDto;
 import com.prime.Cart.dto.MovieSummaryDto;
 import com.prime.Cart.entity.Cart;
 import com.prime.Cart.entity.CartItem;
+import com.prime.Cart.exception.CartException;
 import com.prime.Cart.repository.CartItemRepository;
 import com.prime.Cart.repository.CartRepository;
 import com.prime.Cart.utility.MovieResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,11 +35,11 @@ public class CartServiceImpl implements CartService {
     @Autowired
     RestTemplate restTemplate;
 
-    @Value("${gatewayUri}")
-    String gatewayUri;
+//    @Value("${gatewayUri}")
+//    String gatewayUri;
 
     @Override
-    public CartItemDto addToCart(String userId, Integer movieId) {
+    public CartItemDto addToCart(String authorizationHeader, String userId, Integer movieId) {
 
         Optional<Cart> optionalCart = cartRepository.findByUserId(userId);
         Cart cart;
@@ -45,30 +47,39 @@ public class CartServiceImpl implements CartService {
         if (optionalCart.isPresent()) {
             cart = optionalCart.get();
         } else {
-            cart = Cart.builder().userId(userId).build();
-            cart = cartRepository.save(cart);
+            cart = new Cart();
+            cart.setUserId(userId);
         }
-        cartItem.setCart(cart);
 
-        cartItem = cartItemRepository.save(cartItem);
+        List<CartItem> cartItemList = cart.getCartItemList();
+        boolean hasItem = cartItemList.stream().anyMatch((c) -> c.getMovieId().equals(movieId));
+        if (hasItem) throw new CartException("movie already present in the cart");
 
-        MovieSummaryDto movieSummaryDto = fetchMovieSummary(movieId);
+        cart.getCartItemList().add(cartItem);
+        cartRepository.save(cart);
+
+        cartItem = cartItemRepository.findByMovieId(movieId);
+        MovieSummaryDto movieSummaryDto = fetchMovieSummary(authorizationHeader,movieId);
         return CartItemDto.builder().cartItemId(cartItem.getCartItemId()).movie(movieSummaryDto).build();
     }
 
 
-    public MovieSummaryDto fetchMovieSummary(Integer movieId) {
+    public MovieSummaryDto fetchMovieSummary(String authorizationHeader,Integer movieId) {
 
 
+        String gatewayUri="http://GatewayMS";
         String url = gatewayUri + "/movie/movieSummary/" + movieId;
         ParameterizedTypeReference<MovieResponse<MovieSummaryDto>> responseType =
                 new ParameterizedTypeReference<MovieResponse<MovieSummaryDto>>() {
                 };
 
-        ResponseEntity<MovieResponse<MovieSummaryDto>> response =
-                restTemplate.exchange(url, HttpMethod.GET, null, responseType);
 
-// Get the body of the response and then the data
+        HttpEntity<HttpHeaders> httpEntity=setHeaders(authorizationHeader);
+
+        ResponseEntity<MovieResponse<MovieSummaryDto>> response =
+                restTemplate.exchange(url, HttpMethod.GET, httpEntity, responseType);
+
+        // Get the body of the response and then the data
         MovieResponse<MovieSummaryDto> movieResponse = response.getBody();
         MovieSummaryDto movieSummaryDto = movieResponse.getData();
 
@@ -77,13 +88,21 @@ public class CartServiceImpl implements CartService {
 
     }
 
+    public HttpEntity<HttpHeaders> setHeaders(String authorizationHeader){
+        HttpHeaders headers=new HttpHeaders();
+        headers.set("Authorization",authorizationHeader);
+        return new HttpEntity<>(headers);
+
+    }
+
     @Override
     public void removeFromCart(Integer cartItemId) {
+        if(!cartItemRepository.findById(cartItemId).isPresent()) throw new CartException("movie does not exist in the cart");
         cartItemRepository.deleteById(cartItemId);
     }
 
     @Override
-    public CartDto getCart(String userId) {
+    public CartDto getCart(String authorizationHeader, String userId) {
         Optional<Cart> optionalCart = cartRepository.findByUserId(userId);
         Cart cart;
         if (optionalCart.isPresent()) {
@@ -92,9 +111,10 @@ public class CartServiceImpl implements CartService {
             cart = new Cart();
 
         }
+
         List<CartItemDto> cartItemDtoList = new ArrayList<>();
         cart.getCartItemList().stream().forEach((cartItem -> {
-            cartItemDtoList.add(CartItemDto.builder().cartItemId(cartItem.getCartItemId()).movie(fetchMovieSummary(cartItem.getMovieId())).build());
+            cartItemDtoList.add(CartItemDto.builder().cartItemId(cartItem.getCartItemId()).movie(fetchMovieSummary(authorizationHeader,cartItem.getMovieId())).build());
 
         }));
 

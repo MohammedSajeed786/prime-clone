@@ -18,8 +18,8 @@ public class CartController {
     CartService cartService;
 
     @PostMapping("/add/{movieId}")
-    public ResponseEntity<CartResponse<CartItemDto>> addToCart(@RequestHeader("userId") String userId, @PathVariable Integer movieId) {
-        CartItemDto cartItemDto = cartService.addToCart(userId, movieId);
+    public ResponseEntity<CartResponse<CartItemDto>> addToCart(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userId") String userId, @PathVariable Integer movieId) {
+        CartItemDto cartItemDto = cartService.addToCart(authorizationHeader,userId, movieId);
         return new ResponseEntity<>(CartResponse.<CartItemDto>builder().status(201).message("movie added to cart successfully").data(cartItemDto).build(), HttpStatus.CREATED);
     }
 
@@ -29,9 +29,11 @@ public class CartController {
         return new ResponseEntity<>(CartResponse.builder().status(200).message("movie removed from cart successfully").build(), HttpStatus.CREATED);
     }
 
+
     @GetMapping("/all")
-    public ResponseEntity<CartResponse<CartDto>> getCart(@RequestHeader("userId") String userId) {
-        CartDto cartDto = cartService.getCart(userId);
-        return new ResponseEntity<>(CartResponse.<CartDto>builder().status(200).message("cart fetched successfully").data(cartDto).build(), HttpStatus.CREATED);
+    public ResponseEntity<CartResponse<CartDto>> getCart(@RequestHeader("Authorization") String authorizationHeader,@RequestHeader("userId") String userId) {
+
+        CartDto cartDto = cartService.getCart(authorizationHeader,userId);
+        return new ResponseEntity<>(CartResponse.<CartDto>builder().status(200).message("cart fetched successfully").data(cartDto).build(), HttpStatus.OK);
     }
 }

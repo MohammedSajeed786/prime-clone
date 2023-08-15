@@ -15,8 +15,6 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
     @Autowired
     private JwtService jwtService;
 
-    @Autowired
-    RequestValidator requestValidator;
     public JwtAuthenticationFilter() {
         super(Config.class);
     }
@@ -25,9 +23,8 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
-            if (routeValidator.isSecured.test(exchange.getRequest()) &&  requestValidator.isSecured.test(exchange.getRequest())) {
-
-                System.out.println("hello "+exchange.getRequest().getRemoteAddress());
+            if (routeValidator.isSecured.test(exchange.getRequest())) {
+                
                 // Getting data from header named Authorization
                 String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
 

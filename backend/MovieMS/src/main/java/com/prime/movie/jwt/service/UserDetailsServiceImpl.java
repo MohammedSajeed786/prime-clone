@@ -15,11 +15,18 @@ public class UserDetailsServiceImpl {
     @Autowired
     RestTemplate restTemplate;
 
-    private final String URL="http://localhost:8001/auth/getUser/";
+    private final String URL="http://localhost:8000/auth/getUser/";
     public UserDto getUserByUserId(String userId) {
-      UserDto user=  restTemplate.getForObject(this.URL+userId,UserDto.class);
-      return user;
 
+       try {
+
+           UserDto user = restTemplate.getForObject(this.URL + userId, UserDto.class);
+           return user;
+       }
+       catch (Exception e){
+           System.out.println(e.getMessage());
+       }
+      return null;
     }
 
 

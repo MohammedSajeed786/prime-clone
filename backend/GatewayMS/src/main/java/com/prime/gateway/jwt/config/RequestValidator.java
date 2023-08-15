@@ -20,16 +20,16 @@ public class RequestValidator {
 
                 String remoteHost = request.getRemoteAddress().getHostString();
 //                int remotePort = request.getLocalAddress().getPort();
-                System.out.println(remoteHost);
+//                System.out.println(remoteHost);
 
-                System.out.println(request.getPath());
+//                System.out.println(request.getPath());
 //                System.out.println(request.getHeaders().getFirst("origin"));
 //                System.out.println(request.getLocalAddress().getPort());
 //                String remoteHost=request.getHeaders().getFirst("origin").toString().substring(7,16);
                 String port = null;
                 String origin = request.getHeaders().getFirst("origin");
                 if (origin != null) port = origin.substring(17);
-                System.out.println(port);
+//                System.out.println(port);
 //                System.out.println(remoteHost +" "+port);
 
 

@@ -5,10 +5,10 @@ import com.prime.Cart.dto.CartItemDto;
 
 public interface CartService {
 
-    public CartItemDto addToCart(String userId, Integer movieId);
+    public CartItemDto addToCart(String authorizationHeader, String userid, Integer movieId);
 
     public void removeFromCart(Integer cartItemId);
 
 
-    CartDto getCart(String userId);
+    CartDto getCart(String authorizationHeader, String userId);
 }
