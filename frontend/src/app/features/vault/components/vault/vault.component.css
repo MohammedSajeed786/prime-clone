@@ -58,3 +58,53 @@ app-vault-item{
       justify-items: center;
     }
   }
+
+  .empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .empty img {
+    width: 600px;
+    height: 450px;
+  }
+  
+  @media screen and (max-width:600px) {
+    .empty img {
+      width: 400px;
+      height: 300px;
+    }
+  }
+  
+  @media screen and (max-width:400px) {
+    .empty img {
+      width: 250px;
+      height: 200px;
+    }
+  }
+  
+  .empty button {
+    width: 200px;
+    height: 50px;
+    border: none;
+    letter-spacing: 1px;
+    font-size: 15px;
+    line-height: 45px;
+    border-radius: 7px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font: inherit;
+    color: var(--white);
+    background-color: var(--black);
+    border: 3px solid var(--white);
+  }
+  .empty button:hover {
+    cursor: pointer;
+  
+    color: var(--black);
+    background-color: var(--white);
+    border: 3px solid var(--white);
+  }
+  

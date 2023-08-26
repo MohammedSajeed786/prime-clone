@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header" [class]="!isLoggedIn ? 'mobile-hidden' : ''">
   <a [routerLink]="['/catalog']"
     ><span class="logo">
       <b>movie verse</b>
@@ -7,7 +7,7 @@
   <ul *ngIf="isLoggedIn" class="header-list">
     <li class="list-item">
       <a [routerLink]="['/catalog']" [routerLinkActive]="['active']">
-        <div>
+        <div class="icon">
           <lucide-icon name="home"></lucide-icon>
           <span> Home </span>
         </div>
@@ -15,7 +15,7 @@
     </li>
     <li class="list-item">
       <a [routerLink]="['/cart']" [routerLinkActive]="['active']">
-        <div>
+        <div class="icon">
           <lucide-icon name="shopping-bag"></lucide-icon>
           <span> Cart </span>
         </div>
@@ -23,10 +23,57 @@
     </li>
     <li class="list-item">
       <a [routerLink]="['/vault']" [routerLinkActive]="['active']">
-        <div>
+        <div class="icon">
           <lucide-icon name="library"></lucide-icon> <span> Vault </span>
         </div>
       </a>
+    </li>
+    <li class="list-item search">
+      <!-- <div class="searchBox">
+        <form action="">
+          <input type="text" name="" id="" class="searchInput" />
+          <button class="searchButton"><lucide-icon name="search"></lucide-icon></button>
+        </form>
+      </div> -->
+
+      <div class="icon" (click)="showSearch = !showSearch">
+        <lucide-icon name="search" *ngIf="!showSearch"></lucide-icon>
+        <lucide-icon name="x" *ngIf="showSearch"></lucide-icon>
+      </div>
+      <div class="search-wrapper" *ngIf="showSearch">
+        <form class="search-form" [class]="inputFocused ? 'form-focus' : ''">
+          <label class="search-icon">
+            <lucide-icon name="search"></lucide-icon>
+          </label>
+          <input
+            type="search"
+            name="search"
+            id=""
+            class="searchInput"
+            placeholder="Search"
+            (focus)="inputFocused = true"
+            (blur)="inputFocused = false"
+            [(ngModel)]="search"
+            (input)="searchChanged()"
+            (keyup.enter)="loadSearchPage()"
+          />
+        </form>
+        <div class="search-list-wrapper" *ngIf="topSearchedMovies.length > 0">
+          <ul class="search-list">
+            <li class="search-item" *ngFor="let movie of topSearchedMovies">
+              <a
+                [routerLink]="[
+                  '/details/',
+                  movie.title.replaceAll(' ', '-').replaceAll('/', '-')
+                ]"
+                [queryParams]="{ movieId: movie.movieId }"
+                (click)="showSearch = false"
+                >{{ movie.title }}</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </li>
   </ul>
   <span class="profile" *ngIf="isLoggedIn">
@@ -63,7 +110,9 @@
     </svg>
     <div class="profile-dropdown">
       <ul>
-        <li>Profile</li>
+        <li class="profile-link">
+          <a routerLink="/profile"> Profile </a>
+        </li>
         <li (click)="logoutClicked()">Logout</li>
       </ul>
     </div>

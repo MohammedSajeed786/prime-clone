@@ -18,15 +18,11 @@ public class UserDto {
 
     private UUID userId;
     private String email;
-
     private String username;
-
     private String fullName;
-
-    private String password;
-
+    private String profilePicture;
     public User convertDtoToEntity(){
-        return User.builder().email(this.email).fullName(this.fullName).username(this.username).password(this.password).build();
+        return User.builder().email(this.email).fullName(this.fullName).username(this.username).profilePicture(this.profilePicture).build();
     }
 
 

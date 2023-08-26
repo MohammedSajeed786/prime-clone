@@ -46,8 +46,8 @@ export class MovieDetailService {
     );
   }
 
-  generateMovieToken() {
-    return this.http.get<Response>(this.url + 'token/movie').pipe(
+  generateMovieToken(movieId:number) {
+    return this.http.get<Response>(this.url + 'token/movie/'+movieId).pipe(
       tap((res) => {
         this.setMovieToken(res.data);
       })
@@ -62,5 +62,9 @@ export class MovieDetailService {
       return decodedToken.exp < currentTime;
     }
     return true;
+  }
+  cleanUp(){
+    this.clearMovieToken();
+    this.clearTrailerToken();
   }
 }

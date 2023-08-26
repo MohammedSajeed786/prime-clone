@@ -11,13 +11,20 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-``
+``;
 @Injectable({
   providedIn: 'root',
 })
 export class JwtInterceptorService implements HttpInterceptor {
   private url = environment.apiUrl;
-  private filteredRequets = ['auth/login', 'auth/register'];
+  private filteredRequets = [
+    'auth/login',
+    'auth/register',
+    ,
+    'auth/sendOtp',
+    'auth/verifyOtp',
+    'auth/updatePassword',
+  ];
 
   constructor(
     private authService: AuthService,
@@ -48,7 +55,7 @@ export class JwtInterceptorService implements HttpInterceptor {
       } else {
         //if token expired or does not exists
         this.spinner.hide();
-        this.router.navigate(['/login']);
+        this.authService.logout();
         this.toastService.setToastData(
           'info',
           'Token expired please login again'
@@ -57,8 +64,10 @@ export class JwtInterceptorService implements HttpInterceptor {
       }
     }
 
-    return next.handle(req).pipe(finalize(()=>{
-      this.spinner.hide();
-    }));
+    return next.handle(req).pipe(
+      finalize(() => {
+        this.spinner.hide();
+      })
+    );
   }
 }

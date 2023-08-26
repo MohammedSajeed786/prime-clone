@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map, tap } from 'rxjs';
 import { Response } from 'src/app/shared/interfaces/Response';
 import { VaultItem } from 'src/app/shared/interfaces/VaultItem';
-import { addToVault, createVault } from 'src/app/store/action/vault.action';
+import { addToVault, clearVault, createVault } from 'src/app/store/action/vault.action';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -55,5 +55,15 @@ export class VaultService {
         ) != null;
       })
     );
+  }
+
+  clearVault(){
+    this.store.dispatch(clearVault());
+  }
+
+  cleanUp(){
+    this.clearVault();
+    this.isVaultLoaded=false;
+
   }
 }

@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDto {
-    String orderId;
-    Integer price;
+    private  String orderId;
+    private Integer price;
 }

@@ -22,16 +22,17 @@ import java.util.UUID;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID userId;
+    private UUID userId;
 
     @Column(unique = true)
-    String email;
+    private String email;
 
     @Column(unique = true)
-    String username;
-    String fullName;
-    String password;
-    Integer otp;
+    private String username;
+    private String fullName;
+    private String password;
+    private String profilePicture;
+    private Integer otp;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,6 +73,6 @@ public class User implements UserDetails {
         return RegisterDto.builder().email(this.email).fullName(this.fullName).username(this.username).password(this.password).build();
     }
     public UserDto convertEntityToUserDto(){
-        return UserDto.builder().userId(this.userId).email(this.email).fullName(this.fullName).username(this.username).password(this.password).build();
+        return UserDto.builder().userId(this.userId).email(this.email).fullName(this.fullName).username(this.username).profilePicture(this.profilePicture).build();
     }
 }

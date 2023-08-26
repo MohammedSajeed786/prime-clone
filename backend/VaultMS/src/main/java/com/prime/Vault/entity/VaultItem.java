@@ -1,9 +1,6 @@
 package com.prime.Vault.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +15,8 @@ public class VaultItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer vaultItemId;
-    Integer movieId;
+    private Integer vaultItemId;
+    private Integer movieId;
+
 
 }

@@ -18,10 +18,39 @@ spring:
     consul:
       discovery:
         hostname: localhost
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 1MB
+      max-file-size: 5MB
+      max-request-size: 10MB
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    username: mdsajeedmds@gmail.com
+    password: ${SMTP_PASSWORD}
+    port: 587
 
-spring.mail.host: smtp.gmail.com
-spring.mail.port: 587
-spring.mail.username: mdsajeedmds@gmail.com
-spring.mail.password: xmuclvbnlmuossqe
-spring.mail.properties.mail.smtp.auth: true
-spring.mail.properties.mail.smtp.starttls.enable: true
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS_KEY_ID}
+      secret-key: ${AWS_SECRET_ACCESS_KEY}
+    region:
+      static: ${AWS_REGION}
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: primeclone
+
+
+
+
+

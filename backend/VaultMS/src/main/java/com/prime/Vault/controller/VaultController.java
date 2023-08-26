@@ -50,9 +50,9 @@ public class VaultController {
     public ResponseEntity<VaultResponse> checkMovie(@RequestHeader String userId,@PathVariable Integer movieId){
        Boolean hasBought= vaultService.hasUserBoughtMovie(userId,movieId);
        if(hasBought){
-           return new ResponseEntity<>(VaultResponse.builder().status(200).message("user bought this movie").build(), HttpStatus.OK);
+           return new ResponseEntity<>(VaultResponse.builder().status(200).message("user bought this movie").data(true).build(), HttpStatus.OK);
        }
-       else return new ResponseEntity<>(VaultResponse.builder().status(200).message("user did not bought this movie").build(), HttpStatus.OK);
+       else return new ResponseEntity<>(VaultResponse.builder().status(200).message("user did not bought this movie").data(false).build(), HttpStatus.OK);
 
     }
 }

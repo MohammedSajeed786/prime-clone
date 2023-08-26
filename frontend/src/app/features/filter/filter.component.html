@@ -1,0 +1,18 @@
+<div class="filter-container" *ngIf="filterData">
+  <button name="" id="" (click)="showList = !showList">
+    {{ filterData.default ? filterData.default : filterData.type }}
+    <lucide-icon name="chevron-down"></lucide-icon>
+  </button>
+
+  <div *ngIf="showList" class="list-container">
+    <ul>
+      <li
+        *ngFor="let item of filterData.data"
+        (click)="selectChanged(item)"
+        class="list"
+      >
+        {{ item.value | titlecase }}
+      </li>
+    </ul>
+  </div>
+</div>

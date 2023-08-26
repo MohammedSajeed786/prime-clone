@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VaultDto {
-    Integer vaultId;
-    List<VaultItemDto> vault;
+    private  Integer vaultId;
+    private List<VaultItemDto> vault;
 }

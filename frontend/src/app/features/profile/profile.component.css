@@ -1,0 +1,161 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: var(--padding-content);
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.image img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--light-blue);
+  padding: 5px;
+}
+.other-details {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  padding: var(--padding-content);
+}
+.detail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 15px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.title {
+  color: var(--dark-blue);
+  font-weight: bold;
+}
+
+.icon {
+  box-shadow: var(--light-black) 0px 2px 4px 0px,
+    var(--light-black) 0px 2px 16px 0px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#file {
+  display: none;
+}
+
+.change-image {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-blue);
+  color: var(--white);
+  cursor: pointer;
+}
+.change-image lucide-icon {
+  transform: scale(0.75);
+}
+.image {
+  position: relative;
+}
+
+.buttons {
+  width: 50%;
+  padding-left: 100px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.edit,
+.save,
+.cancel {
+  border: none;
+  border-radius: 3px;
+  background-color: var(--light-black);
+  color: var(--white);
+  box-sizing: border-box;
+  height: 40px;
+  width: 150px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.save {
+  color: var(--light-black);
+  background-color: var(--white);
+}
+input {
+  display: block;
+  width: 400px;
+  background-color: transparent;
+  border: 1px solid #373839;
+  outline: none;
+  color: white;
+  height: 30px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  caret-color: var(--light-blue);
+  border-width: 0px 0px 2px 0px;
+  border-radius: 0px;
+  font-size: inherit;
+}
+input:focus {
+  border-color: var(--light-blue);
+}
+
+@media screen and (max-width: 767px) {
+  .other-details {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .buttons {
+    width: 100%;
+    padding: 0px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+}
+@media screen and (max-width: 1200px) {
+  input {
+    width: 330px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  input {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  input {
+    width: 200px;
+  }
+}

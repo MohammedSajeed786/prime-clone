@@ -12,21 +12,18 @@ import com.prime.movie.repository.MovieMediaRepository;
 import com.prime.movie.repository.MovieRepository;
 import com.prime.movie.utility.MovieResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -42,8 +39,10 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     JwtService jwtService;
 
+
     @Autowired
-    RestTemplate restTemplate;
+    WebClient webClient;
+
 
     @Override
     public void addMovies(List<MovieDetailsDto> movieDetailsDtoList) {
@@ -111,7 +110,6 @@ public class MovieServiceImpl implements MovieService {
         } else throw new TokenException("invalid token");
 
     }
-
 
 
     @Override
@@ -195,14 +193,53 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public String generateMovieToken(String userId) {
-            Long expiry = (long) (5 * 60 * 60 * 1000); // 5 hrs
-            return jwtService.generateToken(userId, expiry);
+    public Mono<String> generateMovieToken(String authorizationHeader, String userId, Integer movieId) {
+        return isUserValid(authorizationHeader, movieId)
+                .flatMap(isValid -> {
+                    if (isValid) {
+                        Long expiry = (long) (5 * 60 * 60 * 1000); // 5 hrs
+                        return Mono.just(jwtService.generateToken(userId, expiry));
+                    } else {
+                        throw new MovieException("Illegal access");
+                    }
+                });
     }
+
 
 
     @Override
     public Boolean isTokenValid(String token) {
         return jwtService.isTokenValid(token);
     }
+
+
+    @Override
+    public Mono<Boolean> isUserValid(String authorizationHeader, Integer movieId) {
+        String uri = "http://localhost:8000/vault/checkMovie/" + movieId;
+       return webClient.get().uri(uri).header("Authorization", authorizationHeader).retrieve().bodyToMono(MovieResponse.class).map(movieResponse -> (Boolean) movieResponse.getData());
+
+    }
+
+    @Override
+    public List<MovieSummaryDto> searchMovies(String searchValue, String sortBy, Sort.Direction sortDirection, String genre) {
+        searchValue = searchValue.toLowerCase();
+        List<Movie> movieList = movieRepository.findBySearchValue(searchValue, genre, Sort.by(sortDirection, sortBy));
+        String finalSearchValue = searchValue;
+        return movieList.stream().map(movie -> {
+            String matchedWith = findMatchedWith(movie, finalSearchValue);
+            MovieSummaryDto movieSummaryDto = Movie.convertEntityToSummaryDto(movie);
+            movieSummaryDto.setMatchedWith(matchedWith);
+            return movieSummaryDto;
+        }).collect(Collectors.toList());
+    }
+
+    private String findMatchedWith(Movie movie, String searchValue) {
+        if (movie.getTitle().toLowerCase().matches("^.*" + searchValue + ".*$")) return "title";
+        else {
+            if (Movie.convertStringToList(movie.getCasts()).stream().anyMatch(cast -> cast.toLowerCase().matches("^.*" + searchValue + ".*$")))
+                return "cast";
+            return "invalid";
+        }
+    }
+
 }

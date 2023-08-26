@@ -20,6 +20,6 @@ public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer orderItemId;
-    Integer movieId;
+    private Integer orderItemId;
+    private Integer movieId;
 }

@@ -59,6 +59,6 @@ export class RegisterComponent implements OnInit {
     });
   }
   ngOnDestroy(){
-    this.registerSubscription.unsubscribe();
+    if(this.registerSubscription)this.registerSubscription.unsubscribe();
   }
 }

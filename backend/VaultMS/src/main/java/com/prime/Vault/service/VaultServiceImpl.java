@@ -50,15 +50,15 @@ public class VaultServiceImpl implements VaultService {
             vault.setUserId(userId);
         }
 
-        System.out.println(vault);
+
         List<VaultItem> vaultItemList = vault.getVaultItemList();
         boolean hasItem = vaultItemList.stream().anyMatch((c) -> c.getMovieId().equals(movieId));
         if (hasItem) throw new VaultException("movie already present in the vault");
 
         vault.getVaultItemList().add(vaultItem);
-        vaultRepository.save(vault);
+        vaultItem=vaultRepository.save(vault).getVaultItemList().stream().filter(vi->vi.getMovieId().equals(movieId)).findFirst().get();
 
-        vaultItem = vaultItemRepository.findByMovieId(movieId);
+//        vaultItem = vaultItemRepository.findByMovieId(movieId);
         MovieSummaryDto movieSummaryDto = fetchMovieSummary(authorizationHeader, movieId);
         return VaultItemDto.builder().vaultItemId(vaultItem.getVaultItemId()).movie(movieSummaryDto).build();
     }
@@ -110,7 +110,7 @@ public class VaultServiceImpl implements VaultService {
             vault = new Vault();
 
         }
-        System.out.println(vault);
+//        System.out.println(vault);
         List<VaultItemDto> vaultItemDtoList = new ArrayList<>();
         vault.getVaultItemList().stream().forEach((vaultItem -> {
             vaultItemDtoList.add(VaultItemDto.builder().vaultItemId(vaultItem.getVaultItemId()).movie(fetchMovieSummary(authorizationHeader, vaultItem.getMovieId())).build());
@@ -132,7 +132,7 @@ public class VaultServiceImpl implements VaultService {
 
     @Override
     public Boolean hasUserBoughtMovie(String userId, Integer movieId){
-        System.out.println(userId+" "+movieId);
+//        System.out.println(userId+" "+movieId);
         return vaultRepository.hasUserBoughtMovie(userId,movieId);
     }
 

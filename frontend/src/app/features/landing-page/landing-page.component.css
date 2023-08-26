@@ -14,7 +14,7 @@
   /* background-blend-mode: multiply; */
 }
 .content {
-  padding: 0px var(--padding-content);
+  padding:  var(--padding-content);
 }
 .welcome-text {
   display: flex;
@@ -50,7 +50,7 @@
     width: 200px;
   }
   .content {
-    padding: 0px var(--padding-content-mobile);
+    padding:  var(--padding-content-mobile);
   }
 }
 

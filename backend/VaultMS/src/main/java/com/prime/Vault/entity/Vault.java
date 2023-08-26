@@ -16,14 +16,14 @@ import java.util.List;
 public class Vault {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer vaultId;
+    private Integer vaultId;
 
     @Column(unique = true)
-    String userId;
+    private String userId;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "vaultId", name = "vaultId")
-    List<VaultItem> vaultItemList;
+    private List<VaultItem> vaultItemList;
 
     public Vault() {
         vaultItemList = new ArrayList<>();

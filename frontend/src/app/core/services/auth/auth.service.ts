@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import jwt_decode from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CartService } from 'src/app/features/cart/cart.service';
+import { VaultService } from 'src/app/features/vault/vault.service';
+import { SearchService } from 'src/app/features/search/search.service';
+import { CatalogService } from 'src/app/features/catalog/catalog.service';
+import { MovieDetailService } from 'src/app/features/movie-detail/movie-detail.service';
 
 export interface AuthResponse {
   token: string;
@@ -15,7 +20,15 @@ export interface AuthResponse {
 export class AuthService {
   private url = environment.apiUrl;
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private cartService: CartService,
+    private vaultService: VaultService,
+    private searchService: SearchService,
+    private catalogService:CatalogService,
+    private movieDetailService:MovieDetailService
+  ) {
     if (this.isLoggedIn()) {
       this.setisLoggedIn$(true);
     }
@@ -32,7 +45,8 @@ export class AuthService {
   logout() {
     this.clearToken();
     this.setisLoggedIn$(false);
-    this.router.navigate(['/landingPage']);
+    this.cleanUp();
+    this.router.navigate(['/']);
   }
 
   isLoggedIn() {
@@ -67,5 +81,13 @@ export class AuthService {
       return decodedToken.exp < currentTime;
     }
     return true;
+  }
+
+  cleanUp() {
+    this.cartService.cleanUp();
+    this.vaultService.cleanUp();
+    this.searchService.cleanUp();
+    this.catalogService.cleanUp();
+    this.movieDetailService.cleanUp()
   }
 }

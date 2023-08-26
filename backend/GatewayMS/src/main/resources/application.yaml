@@ -17,10 +17,16 @@ spring:
             allowedHeaders: "*" # Allow all request headers
             allowCredentials: true
       routes:
-        - id: CustomerMS
+        - id: UserMS
           uri: lb://UserMS
           predicates:
             - Path=/auth/**
+        - id: UserMS
+          uri: lb://UserMS
+          predicates:
+            - Path=/profile/**
+          filters:
+            - JwtAuthenticationFilter
         - id: MovieMS
           uri: lb://MovieMS
           predicates:

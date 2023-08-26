@@ -86,4 +86,9 @@ export class CartService {
   clearCart() {
     this.store.dispatch(clearCart());
   }
+
+  cleanUp(){
+    this.clearCart();
+    this.isCartLoaded=false
+  }
 }

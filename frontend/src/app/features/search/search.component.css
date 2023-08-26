@@ -1,0 +1,108 @@
+.genre-catalog {
+    box-sizing: border-box;
+    padding: var(--padding-content);
+    transition: all 0.3s ease-out;
+  }
+  .genre {
+    color: var(--dark-blue);
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  h2 {
+    margin: 0px;
+  }
+ 
+  
+ 
+  
+  
+  span {
+    font-size: 15px;
+    position: relative;
+    top: 3px;
+  }
+  
+  .pagination-button.active {
+    background-color: var(--dark-blue) !important;
+    color: var(--white) !important;
+  }
+  
+  button:disabled {
+    cursor: no-drop;
+    opacity: 0.5;
+  }
+  
+  .back {
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding-left: 15px;
+    font-weight: bold;
+  }
+  .back span {
+    margin-right: 10px;
+  }
+  
+  .back {
+    background-color: var(--dark-black) !important;
+    color: var(--white) !important;
+  }
+  .back span {
+    color: var(--dark-blue) !important;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .genre-catalog {
+      padding: var(--padding-content-ipad);
+    }
+    
+  }
+  @media screen and (min-width: 890px) and (max-width: 1024px) {
+    
+    .genre,.back{
+      padding-left: 30px;
+    }
+    
+  }
+  @media screen and (min-width: 550px) and (max-width: 710px) {
+    
+    .genre,.back{
+      padding-left: 30px;
+    }
+    
+  }
+  
+  @media screen and (max-width: 767px) {
+    .genre-catalog {
+      padding: var(--padding-content-mobile);
+    }
+   
+  
+  }
+  @media screen and (max-width: 420px) {
+    .prev,
+    .next {
+      display: none;
+    }
+  }
+  .filter-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 20px;
+   
+  }
+
+  .extras{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20px;
+    
+  }
+  

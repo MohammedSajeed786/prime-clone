@@ -19,6 +19,7 @@ public class MovieSummaryDto {
     private int duration;
     private String language;
     private Double price;
+    private String matchedWith;
 
 
     public static Movie convertDtoToEntity(MovieSummaryDto dto) {

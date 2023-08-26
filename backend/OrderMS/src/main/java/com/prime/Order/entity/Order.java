@@ -21,17 +21,17 @@ import java.util.List;
 public class Order {
 
     @Id
-    String orderId;
-    String paymentId;
-    String userId;
-    Date timestamp;
-    Integer price;
+    private String orderId;
+    private String paymentId;
+    private String userId;
+    private Date timestamp;
+    private Integer price;
     @Enumerated(EnumType.STRING)
-    Status orderStatus;
+    private Status orderStatus;
 
     @OneToMany
             @JoinColumn(name = "orderId",referencedColumnName = "orderId")
-    List<OrderItem> orderItemList;
+    private List<OrderItem> orderItemList;
 
 
     public static OrderDto convertEntityToDto(Order entity){

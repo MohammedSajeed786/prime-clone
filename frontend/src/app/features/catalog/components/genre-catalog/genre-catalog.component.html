@@ -3,7 +3,16 @@
     <span class="material-symbols-outlined"> arrow_left_alt </span>
     Back
   </div>
+
+  <div class="extras">
+
   <h2 class="genre">{{ genre | titlecase }}</h2>
+  <div class="filter-wrapper">
+    <div class="search-filter">
+     <app-filter [filterData]="sortFilter" (filterEvent)="sortFilterChanged($event)"></app-filter>
+    </div>
+   </div>
+   </div>
   <app-movie-grid [movies]="movieList"></app-movie-grid>
   <div class="pagination">
     <button

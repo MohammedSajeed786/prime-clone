@@ -16,14 +16,14 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer cartId;
+    private Integer cartId;
 
     @Column(unique = true)
-    String userId;
+    private String userId;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "cartId", name = "cartId")
-    List<CartItem> cartItemList;
+    private List<CartItem> cartItemList;
 
     public Cart() {
         cartItemList = new ArrayList<>();

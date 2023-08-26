@@ -38,7 +38,6 @@ public class AuthController {
     public ResponseEntity<UserDto> getUser(@PathVariable String userId) throws UserException {
         UserDto userDto=userService.getUser(userId);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
-
     }
 
     @PostMapping("/sendOtp")

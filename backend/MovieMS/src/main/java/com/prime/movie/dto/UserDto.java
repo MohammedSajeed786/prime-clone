@@ -14,15 +14,8 @@ import java.util.UUID;
 @Data
 public class UserDto {
 
-    UUID userId;
-
-
-    String email;
-
-
-    String username;
-    String fullName;
-    String password;
-
-
+    private  UUID userId;
+    private  String email;
+    private String username;
+    private String fullName;
 }

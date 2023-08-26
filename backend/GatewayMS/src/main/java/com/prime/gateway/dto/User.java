@@ -14,15 +14,15 @@ import java.util.UUID;
 @Data
 public class User {
 
-    UUID userId;
+    private UUID userId;
 
 
-    String email;
+    private String email;
 
 
-    String username;
-    String fullName;
-    String password;
+    private String username;
+    private String fullName;
+    private String password;
 
 
 }

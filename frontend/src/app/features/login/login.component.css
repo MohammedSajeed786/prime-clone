@@ -104,7 +104,9 @@ input {
   text-decoration: none;
   cursor: pointer;
   width: 400px;
+  color: var(--light-blue);
 }
+
 .loginButton {
   background-color: var(--light-blue);
   color: var(--white);

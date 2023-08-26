@@ -82,7 +82,7 @@ export class CartComponent implements OnInit, OnDestroy {
             )
             .subscribe({
               next: (res) => {
-                console.log(res);
+                // console.log(res);
                 Swal.fire({
                   title: 'Payment Success!',
                   text: 'Please wait! You will be redirected to Vault',

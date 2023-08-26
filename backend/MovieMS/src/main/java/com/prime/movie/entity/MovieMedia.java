@@ -17,17 +17,17 @@ public class MovieMedia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer movieMediaId;
+    private Integer movieMediaId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "movieId", referencedColumnName = "movieId")
-    Movie movie;
+    private Movie movie;
 
     @Column(length = 1000)
-    String trailerPath;
+    private String trailerPath;
 
     @Column(length = 1000)
-    String moviePath;
+    private String moviePath;
 
 
     public static MovieMediaDto  convertEntityToDto(MovieMedia entity) {

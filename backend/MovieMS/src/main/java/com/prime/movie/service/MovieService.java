@@ -35,7 +35,11 @@ public interface MovieService {
 
 
 
-    String generateMovieToken(String userId);
+    Mono<String> generateMovieToken(String authorizationHeader, String userId, Integer movieId);
 
     Boolean isTokenValid(String token);
+
+    Mono<Boolean> isUserValid(String authorizationHeader, Integer movieId);
+
+    List<MovieSummaryDto> searchMovies(String searchValue, String sortBy, Sort.Direction sortDirection, String genre);
 }

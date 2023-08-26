@@ -24,9 +24,9 @@
 
 .toast span{
     position: relative;
-    top:20px;
+    top:15px;
     margin-right: 5px;
-    transform: scale(0.65);
+    transform: scale(0.80);
 }
 .done{
     border:1.5px solid #28a745;

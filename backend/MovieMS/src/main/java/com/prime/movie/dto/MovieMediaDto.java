@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MovieMediaDto {
-    Integer movieId;
-    String trailerPath;
-    String moviePath;
+    private Integer movieId;
+    private String trailerPath;
+    private String moviePath;
 
     public static MovieMedia  convertDtoEntity(MovieMediaDto dto) {
         Movie movie=new Movie();

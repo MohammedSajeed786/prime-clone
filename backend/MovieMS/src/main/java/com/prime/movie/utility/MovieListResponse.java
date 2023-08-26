@@ -18,6 +18,7 @@ public class MovieListResponse {
 
     Integer pageSize;
     Long totalResults;
+    Integer currentPageSize;
 
     List<MovieSummaryDto> movies;
 

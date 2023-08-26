@@ -3,6 +3,7 @@ import { CatalogService } from '../../catalog.service';
 import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/shared/interfaces/MovieListResponse';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-catalog',
@@ -16,7 +17,8 @@ export class MovieCatalogComponent implements OnInit {
 
   constructor(
     private movieCatalogService: CatalogService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -32,6 +34,10 @@ export class MovieCatalogComponent implements OnInit {
       });
   }
 
+  navigateToGenrePage(path:string,pathVar:string){
+    this.movieCatalogService.setCurrentPage(1);
+    this.router.navigate([path,pathVar.toLowerCase()]);
+  }
   ngOnDestroy() {
     this.movieResponseSubscription.unsubscribe();
   }

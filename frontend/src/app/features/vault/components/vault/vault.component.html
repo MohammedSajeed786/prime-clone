@@ -1,10 +1,17 @@
 <div class="vault-container">
   <h1 class="title">My Vault</h1>
-  <div class="content">
+  <div class="content" *ngIf="(vault$ | async)?.length != 0; else vaultEmpty">
     <app-vault-item
-      [class]="i%2==1?'expand-col':''"
+      [class]="i % 2 == 1 ? 'expand-col' : ''"
       [vaultItem]="vaultItem"
-      *ngFor="let vaultItem of vault$ | async;index as i"
+      *ngFor="let vaultItem of vault$ | async; index as i"
     ></app-vault-item>
   </div>
+  <ng-template #vaultEmpty>
+    <div class="empty">
+      <img src="../../../../../assets/empty-box-3385481.png" alt="" />
+      <h2>Your Vault is Empty</h2>
+      <button routerLink="/catalog">Continue Browsing</button>
+    </div>
+  </ng-template>
 </div>

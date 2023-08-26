@@ -2,6 +2,7 @@ export interface MovieListResponse {
     currentPage: number
     pageSize: number
     totalResults: number
+    currentPageSize:number
     movies: Movie[]
   }
   
@@ -14,6 +15,7 @@ export interface MovieListResponse {
     duration: number
     language: string
     price:number
+    matchedWith:string
 }
 
 

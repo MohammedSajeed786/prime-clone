@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ForgotPasswordDto {
-    String email;
-    Integer otp;
-    String newPassword;
+    private String email;
+    private Integer otp;
+    private String newPassword;
 }

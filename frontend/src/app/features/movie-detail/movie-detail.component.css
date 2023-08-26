@@ -73,6 +73,25 @@ p {
   background-color: var(--black);
   border: 3px solid var(--white);
 }
+
+.price button{
+  width: 150px;
+  height: 50px;
+  border: none;
+  letter-spacing: 1px;
+  font-size: 15px;
+
+  /* border: 3px solid var(--black); */
+
+  line-height: 45px;
+  border-radius: 7px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  color: var(--white);
+  background-color: var(--black);
+  border: 3px solid var(--white);
+  font-weight: bold;
+}
 .circle button {
   color: var(--white);
   background-color: rgb(78, 80, 83);
@@ -91,13 +110,14 @@ p {
   height: 60px; */
   transform: scale(1.25);
 }
-.trailer-overlay,.movie-overlay {
+.trailer-overlay,
+.movie-overlay {
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
+  z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,7 +133,8 @@ p {
   align-items: center;
   justify-content: center;
 }
-.trailer-container,.movie-container {
+.trailer-container,
+.movie-container {
   height: 100%;
   width: 100%;
   position: relative;
@@ -146,7 +167,8 @@ video {
   width: 100%;
   object-fit: cover;
 }
-.trailer-container span, .movie-container span {
+.trailer-container span,
+.movie-container span {
   display: block;
   position: absolute;
   top: 35px;
@@ -175,19 +197,19 @@ ul {
   list-style: none;
 }
 
-.more-details-title{
+.more-details-title {
   font-weight: bold;
   text-transform: capitalize;
 }
-.more-details-value{
+.more-details-value {
   color: var(--grey);
   font-size: 20px;
   font-weight: 600;
 }
-li{
+li {
   margin-bottom: 15px;
 }
-.more-details h5{
+.more-details h5 {
   width: 100%;
   text-align: center;
   margin-top: 0px;
@@ -208,13 +230,47 @@ li{
   .other-details {
     color: var(--white);
   }
-  .more-details-container{
+  .more-details-container {
     padding: var(--padding-content-ipad);
   }
 }
 
 @media screen and (max-width: 767px) {
-  .movie-detail-container, .more-details-container {
+  .movie-detail-container,
+  .more-details-container {
     padding: var(--padding-content-mobile);
+  }
+}
+
+.back {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.back span {
+  margin-right: 10px;
+}
+
+.back {
+  background-color: var(--dark-black) !important;
+  color: var(--white) !important;
+}
+.back span {
+  color: var(--dark-blue) !important;
+}
+@media screen and (min-width: 890px) and (max-width: 1024px) {
+  .back {
+    padding-left: 30px;
+  }
+}
+@media screen and (min-width: 550px) and (max-width: 710px) {
+  .back {
+    padding-left: 30px;
   }
 }

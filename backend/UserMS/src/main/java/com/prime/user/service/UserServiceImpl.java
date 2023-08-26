@@ -7,6 +7,7 @@ import com.prime.user.entity.User;
 import com.prime.user.exception.UserException;
 import com.prime.user.jwt.service.JwtService;
 import com.prime.user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +19,7 @@ import java.util.Random;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -91,7 +93,7 @@ public class UserServiceImpl implements UserService {
             sendMessage(email,"Movie Verse: Reset Password","OTP to change your password is "+otp+". Please do not share your otp with anyone.\nThanks,\nMovie Verse Team.");
             return "otp has been sent to your email";
         }
-            else throw new UserException("invalid email");
+            else throw new UserException("user does not exist with email");
 
     }
 
@@ -111,7 +113,7 @@ public class UserServiceImpl implements UserService {
        if(optionalUser.isPresent()){
            User user=optionalUser.get();
            if(user.getOtp().equals(otp)) return "otp verified successfully";
-           else return "invalid otp";
+           else throw new UserException("invalid otp");
        }
        else throw new UserException("invalid email");
     }

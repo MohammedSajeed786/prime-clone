@@ -18,7 +18,7 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer cartItemId;
-    Integer movieId;
+    private Integer cartItemId;
+    private Integer movieId;
 
 }

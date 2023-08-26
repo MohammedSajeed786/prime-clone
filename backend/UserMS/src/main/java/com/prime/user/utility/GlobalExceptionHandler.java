@@ -1,6 +1,7 @@
 package com.prime.user.utility;
 
 
+import com.prime.user.exception.AwsException;
 import com.prime.user.exception.UserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,6 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-
-
     @ExceptionHandler({UserException.class})
     public ResponseEntity<ErrorInfo> UserExceptionHandler(Exception exception){
 //        System.out.println("inside handler");
@@ -24,6 +23,23 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST.value()).error(HttpStatus.BAD_REQUEST.getReasonPhrase()).timestamp(LocalDateTime.now().toString()).build();
         return new ResponseEntity<>(errorInfo,HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<ErrorInfo> ExceptionHandler(Exception exception){
+//        System.out.println(Arrays.toString(exception.getStackTrace()));
+//        System.out.println("inside handler");
+        ErrorInfo errorInfo=ErrorInfo.builder().message(exception.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value()).error(HttpStatus.BAD_REQUEST.getReasonPhrase()).timestamp(LocalDateTime.now().toString()).build();
+        return new ResponseEntity<>(errorInfo,HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler({AwsException.class})
+    public ResponseEntity<ErrorInfo> AwsExceptionHandler(Exception exception){
+//        System.out.println("inside handler");
+        ErrorInfo errorInfo=ErrorInfo.builder().message(exception.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value()).error(HttpStatus.BAD_REQUEST.getReasonPhrase()).timestamp(LocalDateTime.now().toString()).build();
+        return new ResponseEntity<>(errorInfo,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorInfo> handleValidationException(MethodArgumentNotValidException exception) {

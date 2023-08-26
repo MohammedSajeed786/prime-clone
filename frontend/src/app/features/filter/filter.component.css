@@ -1,0 +1,73 @@
+.filter-container button {
+  width: 250px;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: var(--navy-blue);
+  
+  border-radius: 5px;
+  color: var(--white);
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: inherit;
+}
+
+.filter-container button:hover {
+  color: var(--navy-blue);
+  background-color: var(--white);
+  cursor: pointer;
+}
+
+lucide-icon{
+    transform: scale(0.75);
+    margin: 3px;
+    position: relative;
+    top:1.4px
+}
+
+.list-container{
+  position: absolute;
+  top:50px;
+  z-index: 100;
+  background-color: var(--navy-blue);
+  color: var(--white);
+  border-radius: 8px;
+
+}
+
+.list-container ul{
+    list-style: none;
+  
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    width: 250px;
+
+}
+
+li{
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+    /* height:50px; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+li:hover{
+    color: var(--navy-blue);
+    background-color: var(--white);
+}
+
+.filter-container{
+    position: relative;
+}

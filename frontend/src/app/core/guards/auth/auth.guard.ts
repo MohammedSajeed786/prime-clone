@@ -6,7 +6,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
   let path = route.routeConfig?.path;
-  let authPaths = ['login', 'register', ''];
+  let authPaths = ['login', 'register', 'forgot', ''];
   if (authService.isLoggedIn() && !authService.isTokenExpired()) {
     //user already logged in and token not expired
 
@@ -20,14 +20,17 @@ export const authGuard: CanActivateFn = (route, state) => {
     //else redirect to its own page
     return true;
   } else {
-    //user not logged in
+    //user not logged in or token expired
+    authService.clearToken();
+    authService.cleanUp();
+    authService.setisLoggedIn$(false);
 
     //allow him to go to authPaths, if he wants
     if (authPaths?.includes(path as string)) return true;
-
-    //else redirect to base '' landingPage
-    authService.clearToken();
-    router.navigate(['/']);
-    return false;
+    else {
+      //else redirect to base '' landingPage
+      router.navigate(['/']);
+      return false;
+    }
   }
 };

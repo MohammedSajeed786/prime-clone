@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartDto {
-    Integer cartId;
-    List<CartItemDto> cart;
+    private Integer cartId;
+    private List<CartItemDto> cart;
 }

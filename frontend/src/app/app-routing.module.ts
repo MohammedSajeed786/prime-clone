@@ -23,6 +23,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'forgot',
+    canActivate: [authGuard],
+    loadChildren: () =>
+      import('./features/forgot-password/forgot-password.module').then(
+        (m) => m.ForgotPasswordModule
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     canActivate: [authGuard],
@@ -34,14 +42,13 @@ const routes: Routes = [
 
   {
     path: 'catalog',
-    canActivate: [authGuard, cartGuard,vaultGuard],
+    canActivate: [authGuard, cartGuard, vaultGuard],
     loadChildren: () =>
       import('./features/catalog/catalog.module').then((m) => m.CatalogModule),
   },
   {
     path: 'details',
-    canActivate: [authGuard, cartGuard,vaultGuard],
-
+    canActivate: [authGuard, cartGuard, vaultGuard],
     loadChildren: () =>
       import('./features/movie-detail/movie-detail.module').then(
         (m) => m.MovieDetailModule
@@ -49,14 +56,27 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    canActivate: [authGuard, cartGuard,vaultGuard],
+    canActivate: [authGuard, cartGuard, vaultGuard],
     loadChildren: () =>
       import('./features/cart/cart.module').then((m) => m.CartModule),
   },
   {
-    path:'vault',
-    canActivate:[authGuard,cartGuard,vaultGuard],
-    loadChildren:()=>import("./features/vault/vault.module").then((m)=>m.VaultModule)
+    path: 'vault',
+    canActivate: [authGuard, cartGuard, vaultGuard],
+    loadChildren: () =>
+      import('./features/vault/vault.module').then((m) => m.VaultModule),
+  },
+  {
+    path:'search',
+    canActivate: [authGuard, cartGuard, vaultGuard],
+    loadChildren: () =>
+      import('./features/search/search.module').then((m) => m.SearchModule),
+  },
+  {
+    path:'profile',
+    canActivate: [authGuard, cartGuard, vaultGuard],
+    loadChildren: () =>
+      import('./features/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: '**',

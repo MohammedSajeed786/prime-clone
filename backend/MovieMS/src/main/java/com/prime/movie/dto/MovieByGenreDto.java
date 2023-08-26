@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieByGenreDto {
-    String genre;
-    List<MovieSummaryDto> movies;
+    private String genre;
+    private List<MovieSummaryDto> movies;
 }

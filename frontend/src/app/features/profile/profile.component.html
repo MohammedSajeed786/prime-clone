@@ -1,0 +1,56 @@
+<div class="profile-container" *ngIf="userDetail">
+  <div class="image">
+    <img [src]="profileImage" alt="profile-pic" *ngIf="profileImage"/>
+    <img src="../../../assets/profile_pic.png" alt="profile-pic" *ngIf="profileImage==null"/>
+    <button class="change-image" (click)="file.click()" *ngIf="editProfile">
+      <lucide-icon name="pen-square"></lucide-icon>
+    </button>
+    <input
+      #file
+      type="file"
+      name=""
+      id="file"
+      accept="image/png, image/jpeg"
+      (change)="fileSelected($event)"
+    />
+  </div>
+
+  <div class="other-details">
+    <div class="detail" *ngFor="let detail of userDetails">
+      <span class="icon">
+        <lucide-icon
+          name="{{ detail.icon }}"
+          color="{{ detail.color }}"
+        ></lucide-icon>
+      </span>
+      <div class="content">
+        <span class="title">{{ detail.title }} </span>
+        <span class="value" *ngIf="!editProfile || detail.id != 'fullName'">{{
+          getValue(detail.id)
+        }}</span>
+        <input
+          class="nameInput"
+          type="text"
+          [(ngModel)]="profileName"
+          *ngIf="editProfile && detail.id == 'fullName'"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button
+      class="cancel"
+      *ngIf="editProfile"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+    <button
+      [class]="editProfile ? 'save' : 'edit'"
+      (click)="editProfile?onSave():editProfile=!editProfile"
+    >
+      {{ editProfile ? "Save" : "Edit Profile" }}
+    </button>
+  </div>
+</div>
