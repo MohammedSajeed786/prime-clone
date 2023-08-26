@@ -6,7 +6,7 @@
     <p class="title">{{ cartItem.movie.title }}</p>
     <span class="other-details">
       <p class="release">{{ cartItem.movie.releaseYear }}</p>
-      <p class="price">$ {{ cartItem.movie.price }}</p>
+      <p class="price">$ {{ cartItem.movie.price | number: '1.0-2'  }}</p>
     </span>
   </div>
   <div class="remove">

@@ -34,7 +34,7 @@
         <button (click)="showMovie = true">{{ "Play" | uppercase }}</button>
       </div>
       <div class="price" *ngIf="!isPresentInVault">
-        <button>$ {{ movieDetail.price }}</button>
+        <button>$ {{ movieDetail.price |  number: '1.0-2'  }}</button>
       </div>
 
       <div class="trailer circle" title="trailer" (click)="showTrailer = true">
