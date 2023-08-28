@@ -78,6 +78,7 @@ button:disabled {
   background-color: var(--dark-black) !important;
   color: var(--white) !important;
 }
+
 .pagination-button span,
 .back span {
   color: var(--dark-blue) !important;

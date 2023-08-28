@@ -1,7 +1,6 @@
 package com.prime.movie.jwt.service;
 
 
-
 import com.prime.movie.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,20 +14,17 @@ public class UserDetailsServiceImpl {
     @Autowired
     RestTemplate restTemplate;
 
-    private final String URL="http://localhost:8000/auth/getUser/";
     public UserDto getUserByUserId(String userId) {
+        String URL = "http://localhost:8000/auth/getUser/";
 
-       try {
+        try {
 
-           UserDto user = restTemplate.getForObject(this.URL + userId, UserDto.class);
-           return user;
-       }
-       catch (Exception e){
+            return restTemplate.getForObject(URL + userId, UserDto.class);
+        } catch (Exception e) {
 //           System.out.println(e.getMessage());
-       }
-      return null;
+        }
+        return null;
     }
-
 
 
 }

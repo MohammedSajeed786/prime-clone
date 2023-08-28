@@ -39,6 +39,6 @@ export class MovieCatalogComponent implements OnInit {
     this.router.navigate([path,pathVar.toLowerCase()]);
   }
   ngOnDestroy() {
-    this.movieResponseSubscription.unsubscribe();
+    if(this.movieResponseSubscription)this.movieResponseSubscription.unsubscribe();
   }
 }

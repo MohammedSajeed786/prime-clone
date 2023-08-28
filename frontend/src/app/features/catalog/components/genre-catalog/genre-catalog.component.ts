@@ -97,12 +97,12 @@ export class GenreCatalogComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (value) => {
             // if (page == 1)
-              this.calculatePages(
-                value.currentPage,
-                value.pageSize,
-                value.currentPageSize,
-                value.totalResults
-              );
+            this.calculatePages(
+              value.currentPage,
+              value.pageSize,
+              value.currentPageSize,
+              value.totalResults
+            );
             // else this.currentPage = value.currentPage;
             this.movieList = value.movies;
           },
@@ -114,7 +114,12 @@ export class GenreCatalogComponent implements OnInit, OnDestroy {
     }
   }
 
-  calculatePages(currentPage: number, pageSize: number, cureentPageSize:number,totalResults: number) {
+  calculatePages(
+    currentPage: number,
+    pageSize: number,
+    cureentPageSize: number,
+    totalResults: number
+  ) {
     this.currentPage = currentPage;
     this.totalPages = Math.ceil(totalResults / pageSize);
   }
@@ -136,6 +141,8 @@ export class GenreCatalogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription) => {
+      if (subscription) subscription.unsubscribe();
+    });
   }
 }

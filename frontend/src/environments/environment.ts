@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl:"http://localhost:8000/",
+  // apiUrl:"http://localhost:8000/",
+  apiUrl:"https://prime-clone-gatewayms.up.railway.app/",
   raz_key_id:"rzp_test_9J1SD6kB6esHN6"
 };
 

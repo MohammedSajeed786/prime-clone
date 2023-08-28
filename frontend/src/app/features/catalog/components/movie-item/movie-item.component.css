@@ -76,17 +76,29 @@
     width: 300px;
     height: 360px;
   }
+  .about{
+    width: 300px;
+    top:370px;
+  }
 }
 @media screen and (min-width: 1281px) and (max-width: 1360px) {
   .movie-item-container {
     width: 270px;
     height: 360px;
   }
+  .about{
+    width: 270px;
+    top:370px;
+  }
 }
 @media screen and (min-width: 980px) and (max-width: 1120px) {
   .movie-item-container {
     width: 270px;
     height: 360px;
+  }
+  .about{
+    width: 270px;
+    top:370px;
   }
 }
 
@@ -95,6 +107,10 @@
     width: 250px;
     height: 300px;
   }
+  .about{
+    width: 250px;
+    top:310px;
+  }
 }
 
 @media screen and (min-width: 710px) and (max-width: 819px) {
@@ -102,11 +118,19 @@
     width: 220px;
     height: 270px;
   }
+  .about{
+    width: 220px;
+    top:280px;
+  }
 }
 @media screen and (min-width: 580px) and (max-width: 709px) {
   .movie-item-container {
     width: 270px;
     height: 310px;
+  }
+  .about{
+    width: 270px;
+    top:320px;
   }
 }
 @media screen and (min-width: 481px) and (max-width: 579px) {
@@ -114,17 +138,29 @@
     width: 220px;
     height: 270px;
   }
+  .about{
+    width: 220px;
+    top:280px;
+  }
 }
 @media screen and (min-width: 400px) and (max-width: 480px) {
   .movie-item-container {
     width: 180px;
     height: 220px;
   }
+  .about{
+    width: 180px;
+    top:230px;
+  }
 }
 @media screen and (min-width: 345px) and (max-width: 400px) {
   .movie-item-container {
     width: 150px;
     height: 200px;
+  }
+  .about{
+    width: 150px;
+    top:210px;
   }
 }
 
@@ -133,10 +169,25 @@
     width: 300px;
     height: 250px;
   }
+  .about{
+    width: 300px;
+    top:260px;
+  }
 }
 @media screen and (max-width: 300px) {
   .movie-item-container {
     width: 200px;
     height: 250px;
+  }
+  .about{
+    width: 200px;
+    top:260px;
+  }
+}
+
+@media screen and (max-width:580px) {
+  .other-details{
+    flex-direction: column;
+    row-gap: 10px;
   }
 }

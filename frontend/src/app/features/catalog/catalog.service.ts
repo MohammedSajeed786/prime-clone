@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class CatalogService {
   url = environment.apiUrl + 'movie/';
   sortObj: { id: string; value: string; order: string } | null = null;
-  currentPage=1;
+  currentPage = 1;
   constructor(private http: HttpClient) {}
 
   getAllMovies(): Observable<MovieListResponse> {
@@ -22,10 +22,10 @@ export class CatalogService {
     return this.http.get<Response>(this.url + 'genres/movies');
   }
 
-  setCurrentPage(page:number){
-    this.currentPage=page;
+  setCurrentPage(page: number) {
+    this.currentPage = page;
   }
-  getCurrentPage(){
+  getCurrentPage() {
     return this.currentPage;
   }
 

@@ -154,7 +154,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
           this.retryVideoLoad(this.trailerPlayer);
         },
         error: (err) => {
-          this.toastService.setToastData('error', err.error.message);
+          if(err)this.toastService.setToastData('error', err.error.message);
         },
       })
     );
@@ -166,11 +166,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         next: (res) => {
           // console.log(res)
           this.movieToken = res.data;
-
           this.retryVideoLoad(this.moviePlayer);
         },
         error: (err) => {
-          this.toastService.setToastData('error', err.error.message);
+         if(err) this.toastService.setToastData('error', err.error.message);
         },
       })
     );

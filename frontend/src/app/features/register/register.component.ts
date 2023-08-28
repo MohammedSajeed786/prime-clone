@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
       next: (res) => {
         this.spinner.hide();
         this.authService.setToken(res.token);
+        this.authService.setisLoggedIn$(true);
         this.toastService.setToastData('done', 'Welcome buddy');
         this.router.navigate(['/catalog']);
       },
