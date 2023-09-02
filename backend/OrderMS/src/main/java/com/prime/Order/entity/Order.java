@@ -30,7 +30,7 @@ public class Order {
     private Status orderStatus;
 
     @OneToMany(cascade = CascadeType.ALL)
-            @JoinColumn(name = "orderId",referencedColumnName = "orderId")
+    @JoinColumn(name = "orderId",referencedColumnName = "orderId")
     private List<OrderItem> orderItemList;
 
 

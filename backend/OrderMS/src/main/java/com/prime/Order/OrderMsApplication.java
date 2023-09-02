@@ -13,6 +13,7 @@ public class OrderMsApplication {
 		SpringApplication.run(OrderMsApplication.class, args);
 	}
 
+	
 	@LoadBalanced
 	@Bean
 	public RestTemplate restTemplate(){
