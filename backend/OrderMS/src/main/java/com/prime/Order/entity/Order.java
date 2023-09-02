@@ -29,7 +29,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Status orderStatus;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
             @JoinColumn(name = "orderId",referencedColumnName = "orderId")
     private List<OrderItem> orderItemList;
 
